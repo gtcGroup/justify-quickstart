@@ -28,7 +28,6 @@ package com.gtcgroup.justify.demonstration.assertions;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.gtcgroup.justify.core.rule.JstConfigureUserIdRule;
 import com.gtcgroup.justify.core.rulechain.JstRuleChain;
 import com.gtcgroup.justify.core.si.JstRuleChainSI;
 import com.gtcgroup.justify.demo.de.BookingDE;
@@ -40,7 +39,19 @@ import com.gtcgroup.justify.jpa.po.JstAssertCascadeJpaPO;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
 
 /**
- * Demonstration Class
+ * This demonstration class contains a test verifying the anticipated use of the
+ * "cascade" attribute for related classes. The following code is copied from
+ * the BookingDE:
+ *
+ * <pre>
+ * OneToOne(cascade = CascadeType.ALL)
+ * JoinColumn(name = "NOTE_UUID", referencedColumnName = "NOTE_UUID")
+ * private NoteDE note;
+ *
+ * OneToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.PERSIST })
+ * JoinColumn(name = "CUSTOMER_UUID", referencedColumnName = "CUSTOMER_UUID")
+ * private CustomerDE customer;
+ * </pre>
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2017 by Global Technology Consulting Group, Inc. at
@@ -50,38 +61,42 @@ import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
  * @author Marvin Toll
  * @since v3.0
  */
-@SuppressWarnings({ "javadoc", "static-method" })
 public class AssertionsCascadeDemonstration {
 
-	private static final String BOOKING_UUID = "bookingUUID";
-	private static final String NOTE_UUID = "noteUUID";
-	private static final String CUSTOMER_UUID = "customerUUID";
+	private static BookingDE bookingDE;
 
+	static {
+		final CustomerDE customerDE = new CustomerDE();
+		final NoteDE noteDE = new NoteDE();
+
+		final BookingDE bookingDE = new BookingDE();
+		bookingDE.setNote(noteDE);
+		bookingDE.setCustomer(customerDE);
+
+		AssertionsCascadeDemonstration.bookingDE = bookingDE;
+	}
+
+	/**
+	 * This rule launches an in-memory database.
+	 */
 	@Rule
-	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(true).bindJulToLog4j(true)
-			.around(JstConfigureJpaRule.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU))
-			.around(JstConfigureUserIdRule.withUserId());
+	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).bindJulToLog4j(true)
+			.around(JstConfigureJpaRule.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU));
 
+	/**
+	 * This method verifies that the relationships on the BookingDE were
+	 * properly annotated for cascades.
+	 */
+	@SuppressWarnings("static-method")
 	@Test
-	public void demonstrateCascadeTypesForBooking1() {
+	public void demonstrateCascadeTypesAssertionForBookingDE() {
 
 		final JstAssertCascadeJpaPO assertJpaPO = JstAssertCascadeJpaPO
-				.withPopulatedEntity(ConstantsDemonstration.JUSTIFY_PU, populateBooking()).withCascadeAll("getNote")
-				.withCascadeAllExceptRemove("getCustomer");
+				.withPopulatedEntity(ConstantsDemonstration.JUSTIFY_PU, AssertionsCascadeDemonstration.bookingDE)
+				.withCascadeAll("getNote").withCascadeAllExceptRemove("getCustomer")
+				.withCleanupAfterTheTest("getCustomer");
 
 		AssertionsJPA.assertCascadeTypes(assertJpaPO);
 	}
 
-	private BookingDE populateBooking() {
-
-		final CustomerDE customerDE = new CustomerDE().setUuid(AssertionsCascadeDemonstration.CUSTOMER_UUID);
-		final NoteDE noteDE = new NoteDE().setUuid(AssertionsCascadeDemonstration.NOTE_UUID);
-
-		final BookingDE bookingDE = new BookingDE();
-		bookingDE.setUuid(AssertionsCascadeDemonstration.BOOKING_UUID);
-		bookingDE.setNote(noteDE);
-		bookingDE.setCustomer(customerDE);
-
-		return bookingDE;
-	}
 }
