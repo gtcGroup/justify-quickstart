@@ -25,11 +25,11 @@
  */
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 
 repositories {
 
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -44,5 +44,4 @@ dependencies {
     compile 'org.apache.deltaspike.cdictrl:deltaspike-cdictrl-weld:1.7.1'
     compile 'org.jboss.weld.se:weld-se-core:2.1.2.Final'
     compile 'com.h2database:h2:1.4.193'
-
 }

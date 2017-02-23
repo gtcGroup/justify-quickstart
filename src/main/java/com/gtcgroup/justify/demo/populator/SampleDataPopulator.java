@@ -30,7 +30,6 @@ import java.util.List;
 
 import com.gtcgroup.justify.demo.de.SampleDE;
 import com.gtcgroup.justify.jpa.helper.JstBaseDataPopulator;
-import com.gtcgroup.justify.jpa.rm.JstQueryJpaRM;
 
 /**
  * @since v. 1.0
@@ -46,13 +45,12 @@ public class SampleDataPopulator extends JstBaseDataPopulator {
 	 * @see JstBaseDataPopulator#populateCreateListTM(JstQueryRM)
 	 */
 	@Override
-	public List<Object> populateCreateListTM(final JstQueryJpaRM queryRM) {
-
+	public List<Object> populateCreateListTM(final String persistenceUnitName) {
 		SampleDataPopulator.sampleDE = new SampleDE().setUuid(ConstantsDemonstration.SAMPLE_DE_UUID);
 
 		SampleDataPopulator.ENTITY_IDENTITY = SampleDataPopulator.sampleDE.getUuid();
 
-		final List<Object> deList = new ArrayList<Object>();
+		final List<Object> deList = new ArrayList<>();
 
 		deList.add(SampleDataPopulator.sampleDE);
 

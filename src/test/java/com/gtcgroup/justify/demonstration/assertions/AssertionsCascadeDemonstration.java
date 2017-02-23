@@ -36,7 +36,7 @@ import com.gtcgroup.justify.demo.de.CustomerDE;
 import com.gtcgroup.justify.demo.de.NoteDE;
 import com.gtcgroup.justify.demo.populator.ConstantsDemonstration;
 import com.gtcgroup.justify.jpa.assertions.AssertionsJPA;
-import com.gtcgroup.justify.jpa.assertions.JstAssertJpaPO;
+import com.gtcgroup.justify.jpa.po.JstAssertCascadeJpaPO;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
 
 /**
@@ -59,15 +59,15 @@ public class AssertionsCascadeDemonstration {
 
 	@Rule
 	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(true).bindJulToLog4j(true)
-	.around(JstConfigureJpaRule.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU))
-	.around(JstConfigureUserIdRule.withUserId());
+			.around(JstConfigureJpaRule.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU))
+			.around(JstConfigureUserIdRule.withUserId());
 
 	@Test
 	public void demonstrateCascadeTypesForBooking1() {
 
-		final JstAssertJpaPO assertJpaPO = JstAssertJpaPO
-				.withPopulatedEntity(ConstantsDemonstration.JUSTIFY_PU, populateBooking())
-				.withCascadeAll(NoteDE.class, "note").withCascadeAllExceptRemove(CustomerDE.class, "customer");
+		final JstAssertCascadeJpaPO assertJpaPO = JstAssertCascadeJpaPO
+				.withPopulatedEntity(ConstantsDemonstration.JUSTIFY_PU, populateBooking()).withCascadeAll("getNote")
+				.withCascadeAllExceptRemove("getCustomer");
 
 		AssertionsJPA.assertCascadeTypes(assertJpaPO);
 	}

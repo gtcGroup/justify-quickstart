@@ -34,32 +34,26 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Version;
 
-import com.gtcgroup.justify.core.base.JstBaseTestingDE;
+import com.gtcgroup.justify.core.base.JstBaseDE;
 import com.gtcgroup.justify.core.rule.JstConfigureUserIdRule;
 
 @SuppressWarnings("javadoc")
 @MappedSuperclass
-public abstract class BaseAuditDE extends JstBaseTestingDE {
+public abstract class BaseAuditDE extends JstBaseDE {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(insertable = true, updatable = false, unique = false, name = "CREATE_TIME",
-			nullable = false,
-			columnDefinition = "timestamp")
+	@Column(insertable = true, updatable = false, unique = false, name = "CREATE_TIME", nullable = false, columnDefinition = "timestamp")
 	private Timestamp createTime;
 
 	@Version
-	@Column(insertable = true, updatable = true, unique = false, name = "UPDATE_TIME",
-	nullable = false,
-	columnDefinition = "timestamp")
+	@Column(insertable = true, updatable = true, unique = false, name = "UPDATE_TIME", nullable = false, columnDefinition = "timestamp")
 	private Timestamp updateTime;
 
-	@Column(insertable = true, updatable = false, unique = false, name = "CREATE_USER",
-			nullable = false)
+	@Column(insertable = true, updatable = false, unique = false, name = "CREATE_USER", nullable = false)
 	private String createUser;
 
-	@Column(insertable = true, updatable = true, unique = false, name = "UPDATE_USER",
-			nullable = false)
+	@Column(insertable = true, updatable = true, unique = false, name = "UPDATE_USER", nullable = false)
 	private String updateUser;
 
 	@Override
@@ -116,34 +110,30 @@ public abstract class BaseAuditDE extends JstBaseTestingDE {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <CONCRETE extends BaseAuditDE> CONCRETE setCreateTime(
-			final Timestamp createTime) {
+	public <CONCRETE extends BaseAuditDE> CONCRETE setCreateTime(final Timestamp createTime) {
 
 		this.createTime = createTime;
-		return (CONCRETE)this;
+		return (CONCRETE) this;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <CONCRETE extends BaseAuditDE> CONCRETE setCreateUser(
-			final String createUser) {
+	public <CONCRETE extends BaseAuditDE> CONCRETE setCreateUser(final String createUser) {
 
 		this.createUser = createUser;
-		return (CONCRETE)this;
+		return (CONCRETE) this;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <CONCRETE extends BaseAuditDE> CONCRETE setUpdateTime(
-			final Timestamp updateTime) {
+	public <CONCRETE extends BaseAuditDE> CONCRETE setUpdateTime(final Timestamp updateTime) {
 
 		this.updateTime = updateTime;
-		return (CONCRETE)this;
+		return (CONCRETE) this;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <CONCRETE extends BaseAuditDE> CONCRETE setUpdateUser(
-			final String updateUser) {
+	public <CONCRETE extends BaseAuditDE> CONCRETE setUpdateUser(final String updateUser) {
 
 		this.updateUser = updateUser;
-		return (CONCRETE)this;
+		return (CONCRETE) this;
 	}
 }

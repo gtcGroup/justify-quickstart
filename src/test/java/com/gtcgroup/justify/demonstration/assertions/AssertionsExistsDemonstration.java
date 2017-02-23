@@ -26,19 +26,15 @@
 
 package com.gtcgroup.justify.demonstration.assertions;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.gtcgroup.justify.core.rule.JstConfigureUserIdRule;
 import com.gtcgroup.justify.core.rulechain.JstRuleChain;
 import com.gtcgroup.justify.core.si.JstRuleChainSI;
 import com.gtcgroup.justify.demo.de.SampleDE;
 import com.gtcgroup.justify.demo.populator.ConstantsDemonstration;
 import com.gtcgroup.justify.demo.populator.SampleDataPopulator;
 import com.gtcgroup.justify.jpa.assertions.AssertionsJPA;
-import com.gtcgroup.justify.jpa.helper.JstEntityManagerUtilHelper;
-import com.gtcgroup.justify.jpa.rm.JstQueryJpaRM;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
 
 /**
@@ -56,12 +52,11 @@ import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
 public class AssertionsExistsDemonstration {
 
 	@Rule
-	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false)
-			.around(JstConfigureJpaRule.withDataPopulator(ConstantsDemonstration.JUSTIFY_PU, SampleDataPopulator.class))
-			.around(JstConfigureUserIdRule.withUserId());
+	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).around(JstConfigureJpaRule
+			.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU).withDataPopulators(SampleDataPopulator.class));
 
 	@Test
-	public void demonstrateExistsInDatabaseWithEntityIdentities() {
+	public void demonstrateExistsInDatabaseWithEntityIdentity() {
 
 		AssertionsJPA.assertExistsInDatabaseWithEntityIdentities(ConstantsDemonstration.JUSTIFY_PU, SampleDE.class,
 				ConstantsDemonstration.SAMPLE_DE_UUID);
@@ -72,55 +67,5 @@ public class AssertionsExistsDemonstration {
 
 		AssertionsJPA.assertExistsInDatabaseWithEntities(ConstantsDemonstration.JUSTIFY_PU,
 				SampleDataPopulator.sampleDE);
-	}
-
-	@Test
-	public void demonstrateExistsInPersistenceContextWithModifiableEntities() {
-
-		final boolean existsInPersistenceContext = JstEntityManagerUtilHelper
-				.existsInPersistenceContextWithManagedEntities(
-						AssertionsJPA.getEntityManager(ConstantsDemonstration.JUSTIFY_PU), findModifiableSampleDE());
-
-		Assertions.assertThat(existsInPersistenceContext).isTrue();
-	}
-
-	@Test
-	public void demonstrateExistsInPersistenceContextWithReadOnlyEntities() {
-
-		final boolean existsInPersistenceContext = JstEntityManagerUtilHelper
-				.existsInPersistenceContextWithManagedEntities(
-						AssertionsJPA.getEntityManager(ConstantsDemonstration.JUSTIFY_PU), findReadOnlySampleDE());
-
-		Assertions.assertThat(existsInPersistenceContext).isFalse();
-	}
-
-	@Test
-	public void demonstrateExistsInSharedCacheWithEntityIdentities() {
-
-		AssertionsJPA.assertExistsInSharedCacheWithEntityIdentities(ConstantsDemonstration.JUSTIFY_PU, SampleDE.class,
-				ConstantsDemonstration.SAMPLE_DE_UUID);
-	}
-
-	@Test
-	public void demonstrateExistsInSharedCacheWithPopulatedEntities() {
-
-		AssertionsJPA.assertExistsInSharedCacheWithEntities(ConstantsDemonstration.JUSTIFY_PU,
-				SampleDataPopulator.sampleDE);
-	}
-
-	private SampleDE findModifiableSampleDE() {
-
-		final JstQueryJpaRM queryRM = new JstQueryJpaRM(
-				AssertionsJPA.getEntityManager(ConstantsDemonstration.JUSTIFY_PU));
-
-		return queryRM.findModifiableSingleOrException(SampleDE.class, ConstantsDemonstration.SAMPLE_DE_UUID);
-	}
-
-	private SampleDE findReadOnlySampleDE() {
-
-		final JstQueryJpaRM queryRM = new JstQueryJpaRM(
-				AssertionsJPA.getEntityManager(ConstantsDemonstration.JUSTIFY_PU));
-
-		return queryRM.findReadOnlySingleOrException(SampleDE.class, ConstantsDemonstration.SAMPLE_DE_UUID);
 	}
 }
