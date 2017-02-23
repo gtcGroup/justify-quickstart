@@ -1,5 +1,5 @@
 # justify-quickstart
-QuickStart DEMONSTRATION for Java 8: Justify supports JUnit testing with "real" (functionally equivalent) services, relegating mocks to the role of servicing reluctant collaborators.
+Justify supports JUnit testing with "real" (functionally equivalent) services, relegating mocks to the role of servicing reluctant collaborators. Follow instructions <a href="http://pedcentral.com/justify/justify-quickstart/" target="_blank">here</a> for exploration.
 
 <a href="http://pedcentral.com/justify/" target="_blank">
 <img src="http://i1.wp.com/pedcentral.com/wp-content/uploads/2015/01/Justify-e1457816173825.png" alt="PED Central">
