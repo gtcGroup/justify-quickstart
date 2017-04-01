@@ -24,7 +24,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.gtcgroup.justify.demonstration.populator;
+package com.gtcgroup.justify.demonstration.query;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
@@ -33,7 +33,7 @@ import org.junit.Test;
 import com.gtcgroup.justify.core.rulechain.JstRuleChain;
 import com.gtcgroup.justify.core.si.JstRuleChainSI;
 import com.gtcgroup.justify.demo.populator.ConstantsDemonstration;
-import com.gtcgroup.justify.demo.populator.SampleDataPopulator;
+import com.gtcgroup.justify.demo.populator.QuickStartDataPopulator;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
 
 /**
@@ -48,15 +48,15 @@ import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
  * @since v3.0
  */
 @SuppressWarnings("all")
-public class SampleDataPopulatorDemonstration {
+public class QueryListDemonstration {
 
 	@Rule
 	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).around(JstConfigureJpaRule
-			.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU).withDataPopulators(SampleDataPopulator.class));
+			.withPersistence(ConstantsDemonstration.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
 
 	@Test
 	public void demonstratePopulator() {
 
-		Assertions.assertThat(SampleDataPopulator.sampleDE).isNotNull();
+		Assertions.assertThat(QuickStartDataPopulator.quickStartDE).isNotNull();
 	}
 }

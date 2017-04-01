@@ -81,7 +81,7 @@ public class AssertionsCascadeDemonstration {
 	 */
 	@Rule
 	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).bindJulToLog4j(true)
-			.around(JstConfigureJpaRule.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU));
+			.around(JstConfigureJpaRule.withPersistence(ConstantsDemonstration.JUSTIFY_PU));
 
 	/**
 	 * This method verifies that the relationships on the BookingDE were

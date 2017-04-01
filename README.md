@@ -7,6 +7,10 @@ Justify supports JUnit testing with "real" (functionally equivalent) services, r
 
 ### <a name="changes"></a>Release Notes
 
-#### Version 1.2.0 <span class="date">2017-xx-xx</span>
+#### Version 6.3.0 <span class="date">2017-03-12</span>
+
+*   02 [Prepare for v6.3.0 Launch](https://github.com/gtcGroup/justify-quickstart/issues/2)
+
+#### Version 6.2.0 <span class="date">2017-02-07</span>
 
 *   1 [Launch Project](https://github.com/gtcGroup/justify-quickstart/issues/1)

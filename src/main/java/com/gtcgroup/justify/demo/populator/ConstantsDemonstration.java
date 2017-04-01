@@ -41,6 +41,6 @@ public enum ConstantsDemonstration {
 
 	public static final String JUSTIFY_PU = "justify-pu";
 
-	public static final String SAMPLE_DE_UUID = "sampleUUID";
+	public static final String QUICKSTART_DE_UUID = "quickStartUUID";
 
 }

@@ -46,19 +46,19 @@ import org.eclipse.persistence.annotations.Cache;
  * @since v3.0
  */
 @Entity
-@Table(name = "SAMPLE_DE")
-@AttributeOverrides({ @AttributeOverride(name = "createUser", column = @Column(name = "SAMPLE_DE_CREATE_USER_C")),
-	@AttributeOverride(name = "createTime", column = @Column(name = "SAMPLE_DE_CREATE_S")),
-	@AttributeOverride(name = "updateUser", column = @Column(name = "SAMPLE_DE_LAST_UPDT_USER_C")),
-	@AttributeOverride(name = "updateTime", column = @Column(name = "SAMPLE_DE_LAST_UPDT_S")),
-	@AttributeOverride(name = "uuid", column = @Column(name = "SAMPLE_DE_UUID")) })
+@Table(name = "QUICK_START_DE")
+@AttributeOverrides({ @AttributeOverride(name = "createUser", column = @Column(name = "QUICK_START_DE_CREATE_USER_C")),
+		@AttributeOverride(name = "createTime", column = @Column(name = "QUICK_START_DE_CREATE_S")),
+		@AttributeOverride(name = "updateUser", column = @Column(name = "QUICK_START_DE_LAST_UPDT_USER_C")),
+		@AttributeOverride(name = "updateTime", column = @Column(name = "QUICK_START_DE_LAST_UPDT_S")),
+		@AttributeOverride(name = "uuid", column = @Column(name = "QUICKSTART_DE_UUID")) })
 @Cache(size = 100, alwaysRefresh = true, refreshOnlyIfNewer = true)
-@NamedQuery(name = "querySample", query = "SELECT s FROM SampleDE s")
-public class SampleDE extends BaseUuidDE {
+@NamedQuery(name = "queryQuickStartList", query = "SELECT s FROM QuickStartDE s")
+public class QuickStartDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "SAMPLE_DE_TEXT")
+	@Column(name = "QUICK_START_DE_TEXT")
 	private String text;
 
 	/**
@@ -72,7 +72,7 @@ public class SampleDE extends BaseUuidDE {
 	 * @param text
 	 * @return NoteDE
 	 */
-	public SampleDE setText(final String text) {
+	public QuickStartDE setText(final String text) {
 		this.text = text;
 		return this;
 	}

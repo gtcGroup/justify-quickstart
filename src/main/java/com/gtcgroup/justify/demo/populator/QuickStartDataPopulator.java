@@ -28,31 +28,32 @@ package com.gtcgroup.justify.demo.populator;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gtcgroup.justify.demo.de.SampleDE;
+import com.gtcgroup.justify.demo.de.QuickStartDE;
 import com.gtcgroup.justify.jpa.helper.JstBaseDataPopulator;
 
 /**
- * @since v. 1.0
+ * This Helper class provides support for populating test data.
  */
 @SuppressWarnings("javadoc")
-public class SampleDataPopulator extends JstBaseDataPopulator {
+public class QuickStartDataPopulator extends JstBaseDataPopulator {
 
 	public static Object ENTITY_IDENTITY;
 
-	public static SampleDE sampleDE;
+	public static QuickStartDE quickStartDE;
 
 	/**
 	 * @see JstBaseDataPopulator#populateCreateListTM(JstQueryRM)
 	 */
 	@Override
 	public List<Object> populateCreateListTM(final String persistenceUnitName) {
-		SampleDataPopulator.sampleDE = new SampleDE().setUuid(ConstantsDemonstration.SAMPLE_DE_UUID);
 
-		SampleDataPopulator.ENTITY_IDENTITY = SampleDataPopulator.sampleDE.getUuid();
+		QuickStartDataPopulator.quickStartDE = new QuickStartDE().setUuid(ConstantsDemonstration.QUICKSTART_DE_UUID);
+
+		QuickStartDataPopulator.ENTITY_IDENTITY = QuickStartDataPopulator.quickStartDE.getUuid();
 
 		final List<Object> deList = new ArrayList<>();
 
-		deList.add(SampleDataPopulator.sampleDE);
+		deList.add(QuickStartDataPopulator.quickStartDE);
 
 		return deList;
 	}
