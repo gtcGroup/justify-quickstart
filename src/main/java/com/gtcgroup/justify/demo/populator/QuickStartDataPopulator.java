@@ -41,6 +41,8 @@ public class QuickStartDataPopulator extends JstBaseDataPopulator {
 
 	public static QuickStartDE quickStartDE;
 
+	public static List<Object> quickStartList;
+
 	/**
 	 * @see JstBaseDataPopulator#populateCreateListTM(JstQueryRM)
 	 */
@@ -51,10 +53,10 @@ public class QuickStartDataPopulator extends JstBaseDataPopulator {
 
 		QuickStartDataPopulator.ENTITY_IDENTITY = QuickStartDataPopulator.quickStartDE.getUuid();
 
-		final List<Object> deList = new ArrayList<>();
+		QuickStartDataPopulator.quickStartList = new ArrayList<>();
 
-		deList.add(QuickStartDataPopulator.quickStartDE);
+		QuickStartDataPopulator.quickStartList.add(QuickStartDataPopulator.quickStartDE);
 
-		return deList;
+		return QuickStartDataPopulator.quickStartList;
 	}
 }

@@ -38,7 +38,7 @@ import com.gtcgroup.justify.jpa.assertions.AssertionsJPA;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
 
 /**
- * Demonstration Class
+ * This demonstration class contains a test verifying the anticipated use of the
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2017 by Global Technology Consulting Group, Inc. at
@@ -56,16 +56,16 @@ public class AssertionsExistsDemonstration {
 			.withPersistence(ConstantsDemonstration.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
 
 	@Test
+	public void demonstrateExistsInDatabaseWithEntities() {
+
+		AssertionsJPA.assertExistsInDatabaseWithEntities(ConstantsDemonstration.JUSTIFY_PU,
+				QuickStartDataPopulator.quickStartDE);
+	}
+
+	@Test
 	public void demonstrateExistsInDatabaseWithEntityIdentity() {
 
 		AssertionsJPA.assertExistsInDatabaseWithEntityIdentities(ConstantsDemonstration.JUSTIFY_PU, QuickStartDE.class,
 				ConstantsDemonstration.QUICKSTART_DE_UUID);
-	}
-
-	@Test
-	public void demonstrateExistsInDatabaseWithPopulatedEntities() {
-
-		AssertionsJPA.assertExistsInDatabaseWithEntities(ConstantsDemonstration.JUSTIFY_PU,
-				QuickStartDataPopulator.quickStartDE);
 	}
 }

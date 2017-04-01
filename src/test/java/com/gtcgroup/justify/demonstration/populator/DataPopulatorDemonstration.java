@@ -32,19 +32,17 @@ import org.junit.Test;
 
 import com.gtcgroup.justify.core.rulechain.JstRuleChain;
 import com.gtcgroup.justify.core.si.JstRuleChainSI;
-import com.gtcgroup.justify.demo.de.NoteDE;
+import com.gtcgroup.justify.demo.de.QuickStartDE;
 import com.gtcgroup.justify.demo.populator.ConstantsDemonstration;
 import com.gtcgroup.justify.demo.populator.QuickStartDataPopulator;
-import com.gtcgroup.justify.jpa.po.JstCriteriaQueryJpaPO;
+import com.gtcgroup.justify.jpa.assertions.AssertionsJPA;
 import com.gtcgroup.justify.jpa.po.JstFindJpaPO;
-import com.gtcgroup.justify.jpa.rm.JstCriteriaQueryJpaRM;
 import com.gtcgroup.justify.jpa.rm.JstFindJpaRM;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
 
 /**
  * This demonstration class simply creates a record on the in-memory database.
- * Read through the log to see all that occurs; particularly the "INSERT"
- * statement.
+ * Read through the console log to see the "INSERT" statement.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2017 by Global Technology Consulting Group, Inc. at
@@ -62,25 +60,21 @@ public class DataPopulatorDemonstration {
 			.withPersistence(ConstantsDemonstration.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
 
 	@Test
-	public void demonstrateFind() {
+	public void demonstrateFind_using_RM() {
 
 		final JstFindJpaPO findPO = JstFindJpaPO.withFind(true, false)
-				.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU).withEntityClass(NoteDE.class)
+				.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU).withEntityClass(QuickStartDE.class)
 				.withEntityIdentity(ConstantsDemonstration.QUICKSTART_DE_UUID);
 
-		JstFindJpaRM.find(findPO);
+		final QuickStartDE quickStartDE = JstFindJpaRM.find(findPO);
 
-		Assertions.assertThat(QuickStartDataPopulator.quickStartDE).isNotNull();
+		Assertions.assertThat(quickStartDE).isNotNull();
 	}
 
 	@Test
-	public void demonstrateNamedQueryList() {
+	public void demonstrateList_using_powerful_assert() {
 
-		final JstCriteriaQueryJpaPO criteriaQueryPO = JstCriteriaQueryJpaPO.withQuery(true, false)
-				.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU);
-
-		JstCriteriaQueryJpaRM.queryList(criteriaQueryPO);
-
-		Assertions.assertThat(QuickStartDataPopulator.quickStartDE).isNotNull();
+		AssertionsJPA.assertExistsInDatabaseWithListElement(ConstantsDemonstration.JUSTIFY_PU,
+				QuickStartDataPopulator.quickStartList, ConstantsDemonstration.QUICKSTART_DE_UUID);
 	}
 }
