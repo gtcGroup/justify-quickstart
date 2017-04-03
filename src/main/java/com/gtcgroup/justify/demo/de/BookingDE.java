@@ -34,16 +34,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- * This class is a Domain Entity.
- *
- * @since jab-v7.0
- */
 @Entity
 @Table(name = "BOOKING")
-@AttributeOverrides({
-	@AttributeOverride(name = "uuid",
-			column = @Column(name = "BOOKING_UUID"))})
+@AttributeOverrides({ @AttributeOverride(name = "uuid", column = @Column(name = "BOOKING_UUID")) })
 @SuppressWarnings("javadoc")
 public class BookingDE extends BaseUuidDE {
 

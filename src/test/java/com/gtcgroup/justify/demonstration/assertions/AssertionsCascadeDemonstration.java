@@ -33,7 +33,7 @@ import com.gtcgroup.justify.core.si.JstRuleChainSI;
 import com.gtcgroup.justify.demo.de.BookingDE;
 import com.gtcgroup.justify.demo.de.CustomerDE;
 import com.gtcgroup.justify.demo.de.NoteDE;
-import com.gtcgroup.justify.demo.populator.ConstantsDemonstration;
+import com.gtcgroup.justify.demo.populator.ConstantsQuickStart;
 import com.gtcgroup.justify.jpa.assertions.AssertionsJPA;
 import com.gtcgroup.justify.jpa.po.JstAssertCascadeJpaPO;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
@@ -81,7 +81,7 @@ public class AssertionsCascadeDemonstration {
 	 */
 	@Rule
 	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).bindJulToLog4j(true)
-			.around(JstConfigureJpaRule.withPersistence(ConstantsDemonstration.JUSTIFY_PU));
+			.around(JstConfigureJpaRule.withPersistence(ConstantsQuickStart.JUSTIFY_PU));
 
 	/**
 	 * This method verifies that the relationships on the BookingDE were
@@ -92,7 +92,7 @@ public class AssertionsCascadeDemonstration {
 	public void demonstrateCascadeTypesAssertionForBookingDE() {
 
 		final JstAssertCascadeJpaPO assertJpaPO = JstAssertCascadeJpaPO
-				.withPopulatedEntity(ConstantsDemonstration.JUSTIFY_PU, AssertionsCascadeDemonstration.bookingDE)
+				.withPopulatedEntity(ConstantsQuickStart.JUSTIFY_PU, AssertionsCascadeDemonstration.bookingDE)
 				.withCascadeAll("getNote").withCascadeAllExceptRemove("getCustomer")
 				.withCleanupAfterTheTest("getCustomer");
 

@@ -35,7 +35,7 @@ package com.gtcgroup.justify.demo.populator;
  * @since v3.0
  */
 @SuppressWarnings("javadoc")
-public enum ConstantsDemonstration {
+public enum ConstantsQuickStart {
 
 	INSTANCE;
 

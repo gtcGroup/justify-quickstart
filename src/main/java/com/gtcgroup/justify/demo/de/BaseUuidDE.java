@@ -34,8 +34,6 @@ import javax.persistence.MappedSuperclass;
 
 import org.eclipse.persistence.annotations.UuidGenerator;
 
-import com.google.common.base.Objects;
-
 @SuppressWarnings("javadoc")
 @MappedSuperclass
 public abstract class BaseUuidDE extends BaseAuditDE {
@@ -45,40 +43,26 @@ public abstract class BaseUuidDE extends BaseAuditDE {
 	@Id
 	@UuidGenerator(name = "UUID")
 	@GeneratedValue(generator = "UUID")
-	@Column(length = 36, insertable = true, updatable = false, name = "KEY_UUID",
-	nullable = false)
+	@Column(length = 36, insertable = true, updatable = false, name = "KEY_UUID", nullable = false)
 	private String uuid;
-
-	@Override
-	public boolean equals(final Object obj) {
-
-		if (!super.equals(obj)) {
-			return false;
-		}
-
-		final BaseUuidDE other = (BaseUuidDE)obj;
-		return Objects.equal(this.uuid, other.uuid);
-	}
 
 	@SuppressWarnings("unchecked")
 	public <CONCRETE extends BaseUuidDE> CONCRETE generateUuid() {
 
 		this.uuid = UUID.randomUUID().toString();
 
-		return (CONCRETE)this;
+		return (CONCRETE) this;
 	}
 
 	public String getUuid() {
 		return this.uuid;
 	}
 
-
 	@SuppressWarnings("unchecked")
-	public <CONCRETE extends BaseUuidDE> CONCRETE setUuid(
-			final String uuid) {
+	public <CONCRETE extends BaseUuidDE> CONCRETE setUuid(final String uuid) {
 
 		this.uuid = uuid;
 
-		return (CONCRETE)this;
+		return (CONCRETE) this;
 	}
 }

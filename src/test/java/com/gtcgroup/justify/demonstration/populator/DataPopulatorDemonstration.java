@@ -33,7 +33,7 @@ import org.junit.Test;
 import com.gtcgroup.justify.core.rulechain.JstRuleChain;
 import com.gtcgroup.justify.core.si.JstRuleChainSI;
 import com.gtcgroup.justify.demo.de.QuickStartDE;
-import com.gtcgroup.justify.demo.populator.ConstantsDemonstration;
+import com.gtcgroup.justify.demo.populator.ConstantsQuickStart;
 import com.gtcgroup.justify.demo.populator.QuickStartDataPopulator;
 import com.gtcgroup.justify.jpa.assertions.AssertionsJPA;
 import com.gtcgroup.justify.jpa.po.JstFindJpaPO;
@@ -57,14 +57,14 @@ public class DataPopulatorDemonstration {
 
 	@Rule
 	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).around(JstConfigureJpaRule
-			.withPersistence(ConstantsDemonstration.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
+			.withPersistence(ConstantsQuickStart.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
 
 	@Test
 	public void demonstrateFind_using_RM() {
 
 		final JstFindJpaPO findPO = JstFindJpaPO.withFind(true, false)
-				.withPersistenceUnitName(ConstantsDemonstration.JUSTIFY_PU).withEntityClass(QuickStartDE.class)
-				.withEntityIdentity(ConstantsDemonstration.QUICKSTART_DE_UUID);
+				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withEntityClass(QuickStartDE.class)
+				.withEntityIdentity(ConstantsQuickStart.QUICKSTART_DE_UUID);
 
 		final QuickStartDE quickStartDE = JstFindJpaRM.find(findPO);
 
@@ -74,7 +74,7 @@ public class DataPopulatorDemonstration {
 	@Test
 	public void demonstrateList_using_powerful_assert() {
 
-		AssertionsJPA.assertExistsInDatabaseWithListElement(ConstantsDemonstration.JUSTIFY_PU,
-				QuickStartDataPopulator.quickStartList, ConstantsDemonstration.QUICKSTART_DE_UUID);
+		AssertionsJPA.assertExistsInDatabaseWithListElement(ConstantsQuickStart.JUSTIFY_PU,
+				QuickStartDataPopulator.quickStartList, ConstantsQuickStart.QUICKSTART_DE_UUID);
 	}
 }

@@ -49,7 +49,7 @@ public class QuickStartDataPopulator extends JstBaseDataPopulator {
 	@Override
 	public List<Object> populateCreateListTM(final String persistenceUnitName) {
 
-		QuickStartDataPopulator.quickStartDE = new QuickStartDE().setUuid(ConstantsDemonstration.QUICKSTART_DE_UUID);
+		QuickStartDataPopulator.quickStartDE = new QuickStartDE().setUuid(ConstantsQuickStart.QUICKSTART_DE_UUID);
 
 		QuickStartDataPopulator.ENTITY_IDENTITY = QuickStartDataPopulator.quickStartDE.getUuid();
 

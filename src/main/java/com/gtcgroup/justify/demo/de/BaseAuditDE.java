@@ -56,17 +56,6 @@ public abstract class BaseAuditDE extends JstBaseDE {
 	@Column(insertable = true, updatable = true, unique = false, name = "UPDATE_USER", nullable = false)
 	private String updateUser;
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (this.getClass() != obj.getClass()) {
-			return false;
-		}
-		return true;
-	}
-
 	public Timestamp getCreateTime() {
 		return this.createTime;
 	}
@@ -81,15 +70,6 @@ public abstract class BaseAuditDE extends JstBaseDE {
 
 	public String getUpdateUser() {
 		return this.updateUser;
-	}
-
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-
-		return super.hashCode();
 	}
 
 	@PrePersist

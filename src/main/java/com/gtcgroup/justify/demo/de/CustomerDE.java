@@ -31,16 +31,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * This class is a Domain Entity.
- *
- * @since jab-v7.0
- */
 @Entity
 @Table(name = "CUSTOMER")
-@AttributeOverrides({
-	@AttributeOverride(name = "uuid",
-			column = @Column(name = "CUSTOMER_UUID"))})
+@AttributeOverrides({ @AttributeOverride(name = "uuid", column = @Column(name = "CUSTOMER_UUID")) })
 @SuppressWarnings("javadoc")
 public class CustomerDE extends BaseUuidDE {
 

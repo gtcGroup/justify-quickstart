@@ -32,7 +32,7 @@ import org.junit.Test;
 import com.gtcgroup.justify.core.rulechain.JstRuleChain;
 import com.gtcgroup.justify.core.si.JstRuleChainSI;
 import com.gtcgroup.justify.demo.de.QuickStartDE;
-import com.gtcgroup.justify.demo.populator.ConstantsDemonstration;
+import com.gtcgroup.justify.demo.populator.ConstantsQuickStart;
 import com.gtcgroup.justify.demo.populator.QuickStartDataPopulator;
 import com.gtcgroup.justify.jpa.assertions.AssertionsJPA;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
@@ -53,19 +53,19 @@ public class AssertionsExistsDemonstration {
 
 	@Rule
 	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).around(JstConfigureJpaRule
-			.withPersistence(ConstantsDemonstration.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
+			.withPersistence(ConstantsQuickStart.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
 
 	@Test
 	public void demonstrateExistsInDatabaseWithEntities() {
 
-		AssertionsJPA.assertExistsInDatabaseWithEntities(ConstantsDemonstration.JUSTIFY_PU,
+		AssertionsJPA.assertExistsInDatabaseWithEntities(ConstantsQuickStart.JUSTIFY_PU,
 				QuickStartDataPopulator.quickStartDE);
 	}
 
 	@Test
 	public void demonstrateExistsInDatabaseWithEntityIdentity() {
 
-		AssertionsJPA.assertExistsInDatabaseWithEntityIdentities(ConstantsDemonstration.JUSTIFY_PU, QuickStartDE.class,
-				ConstantsDemonstration.QUICKSTART_DE_UUID);
+		AssertionsJPA.assertExistsInDatabaseWithEntityIdentities(ConstantsQuickStart.JUSTIFY_PU, QuickStartDE.class,
+				ConstantsQuickStart.QUICKSTART_DE_UUID);
 	}
 }
