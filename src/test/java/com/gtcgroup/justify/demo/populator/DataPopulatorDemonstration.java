@@ -24,7 +24,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.gtcgroup.justify.demonstration.populator;
+package com.gtcgroup.justify.demo.populator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
