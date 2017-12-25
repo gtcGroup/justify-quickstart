@@ -55,7 +55,7 @@ import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
 @SuppressWarnings("all")
 public class DataPopulatorDemonstration {
 
-	@Rule
+
 	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).around(JstConfigureJpaRule
 			.withPersistence(ConstantsQuickStart.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
 

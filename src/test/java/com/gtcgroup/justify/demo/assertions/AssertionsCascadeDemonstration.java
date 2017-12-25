@@ -79,7 +79,7 @@ public class AssertionsCascadeDemonstration {
 	/**
 	 * This rule launches an in-memory database.
 	 */
-	@Rule
+
 	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).bindJulToLog4j(true)
 			.around(JstConfigureJpaRule.withPersistence(ConstantsQuickStart.JUSTIFY_PU));
 
