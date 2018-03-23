@@ -42,6 +42,6 @@ public enum ConstantsQuickStart {
 
 	public static final String QUICKSTART_NOTE_UUID = "quickStartUUID";
 
-	public final static String QUICKSTART_NOTE_TEXT = "Test Text One";
+	public static final String QUICKSTART_NOTE_TEXT = "Test Text One";
 
 }

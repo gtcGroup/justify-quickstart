@@ -26,14 +26,12 @@
 package com.gtcgroup.justify.quickstart.de;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.eclipse.persistence.annotations.Cache;
 
@@ -41,7 +39,7 @@ import com.gtcgroup.justify.jpa.de.BaseUuidDE;
 
 @Entity
 @Table(name = "NOTE")
-@AttributeOverrides(@AttributeOverride(name = "uuid", column = @Column(name = "NOTE_UUID")))
+@AttributeOverride(name = "uuid", column = @Column(name = "NOTE_UUID"))
 @Cacheable
 @Cache(size = 100)
 @NamedQueries({ @NamedQuery(name = "queryNoteList", query = "SELECT note FROM NoteDE note"),
@@ -52,54 +50,12 @@ public class NoteDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
 
-	public static String STRING = "string";
-
 	@Column(name = "NOTE_TEXT")
 	private String text;
-
-	@Transient
-	private String string = NoteDE.STRING;
-
-	public String getString() {
-
-		return this.string;
-	}
-
-	/**
-	 * @return String
-	 */
-	@SuppressWarnings("static-method")
-	public String getSTRING() {
-		return NoteDE.STRING;
-	}
 
 	public String getText() {
 
 		return this.text;
-	}
-
-	@SuppressWarnings("static-method")
-	public String retrieveException() {
-
-		throw new RuntimeException();
-	}
-
-	/**
-	 * @param string
-	 * @return NothingBean.java
-	 */
-	public NoteDE setString(final String string) {
-		this.string = string;
-		return this;
-	}
-
-	/**
-	 * @param sTRING
-	 * @return NothingBean.java
-	 */
-	public NoteDE setSTRING(final String sTRING) {
-		NoteDE.STRING = sTRING;
-		return this;
 	}
 
 	public NoteDE setText(final String text) {

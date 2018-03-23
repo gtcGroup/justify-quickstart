@@ -26,7 +26,6 @@
 package com.gtcgroup.justify.quickstart.de;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -35,8 +34,7 @@ import com.gtcgroup.justify.jpa.de.BaseUuidDE;
 
 @Entity
 @Table(name = "CUSTOMER")
-@AttributeOverrides({ @AttributeOverride(name = "uuid", column = @Column(name = "CUSTOMER_UUID")) })
-@SuppressWarnings("javadoc")
+@AttributeOverride(name = "uuid", column = @Column(name = "CUSTOMER_UUID"))
 public class CustomerDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
