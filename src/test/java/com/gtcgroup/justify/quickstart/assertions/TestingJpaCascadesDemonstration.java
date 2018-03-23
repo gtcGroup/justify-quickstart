@@ -57,7 +57,6 @@ import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
 @JstConfigureTestLogToConsole
 @JstConfigureTestUserId
 @JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
-@SuppressWarnings("static-method")
 public class TestingJpaCascadesDemonstration {
 
 	private static final String GET_NOTE = "getNote";
