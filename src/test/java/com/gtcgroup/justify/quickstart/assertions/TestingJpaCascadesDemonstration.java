@@ -27,6 +27,8 @@ package com.gtcgroup.justify.quickstart.assertions;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import javax.persistence.OneToOne;
+
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
@@ -42,7 +44,8 @@ import com.gtcgroup.justify.quickstart.populator.ConfigureJustifyWithPopulatorPO
 import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
 
 /**
- * Test Class
+ * This test class verifies the {@link BookingDE} cascade values within the
+ * {@link OneToOne} annotations.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -55,7 +58,7 @@ import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
 @JstConfigureTestUserId
 @JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
 @SuppressWarnings("static-method")
-public class CascadeTest {
+public class TestingJpaCascadesDemonstration {
 
 	private static final String GET_NOTE = "getNote";
 	private static final String GET_CUSTOMER = "getCustomer";
@@ -73,7 +76,7 @@ public class CascadeTest {
 	}
 
 	@Test
-	public void testCascadeTypesForBooking_customerAll() {
+	public void testCascadeTypesForBooking_customerCascadeAll_incorrect() {
 
 		assertThrows(AssertionFailedError.class, () -> {
 			AssertionsJPA.assertCascadeTypes(JstAssertCascadePO.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU)
@@ -83,22 +86,22 @@ public class CascadeTest {
 	}
 
 	@Test
-	public void testCascadeTypesForBooking_happyPath_explicit() {
+	public void testCascadeTypesForBooking_happyPath() {
 
 		final JstAssertCascadePO assertJpaPO = JstAssertCascadePO
 				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withPopulatedEntity(populateBooking())
-				.withCascadePersist(GET_NOTE).withCascadeRemove(GET_NOTE).withCascadeAllExceptRemove(GET_CUSTOMER)
+				.withCascadeAll(GET_NOTE).withCascadeAllExceptRemove(GET_CUSTOMER)
 				.withCleanupAfterVerification(GET_CUSTOMER);
 
 		AssertionsJPA.assertCascadeTypes(assertJpaPO);
 	}
 
 	@Test
-	public void testCascadeTypesForBooking_happyPath1() {
+	public void testCascadeTypesForBooking_happyPath_explicitPersistAndRemove() {
 
 		final JstAssertCascadePO assertJpaPO = JstAssertCascadePO
 				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withPopulatedEntity(populateBooking())
-				.withCascadeAll(GET_NOTE).withCascadeAllExceptRemove(GET_CUSTOMER)
+				.withCascadePersist(GET_NOTE).withCascadeRemove(GET_NOTE).withCascadeAllExceptRemove(GET_CUSTOMER)
 				.withCleanupAfterVerification(GET_CUSTOMER);
 
 		AssertionsJPA.assertCascadeTypes(assertJpaPO);

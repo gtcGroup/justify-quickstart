@@ -39,7 +39,8 @@ import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
 import com.gtcgroup.justify.quickstart.populator.NoteDataPopulator;
 
 /**
- * Test Class
+ * This test class demonstrates JPA convenience assertions using the
+ * {@link AssertionsJPA} enum.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -53,7 +54,7 @@ import com.gtcgroup.justify.quickstart.populator.NoteDataPopulator;
 @JstConfigureTestUserId(userId = "assertionsId")
 @JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
 @SuppressWarnings("static-method")
-public class AssertionsJpaTest {
+public class UsingJpaAssertionsDemonstration {
 
 	@Test
 	public void testExistsInDatabase_happyPath() {
@@ -69,7 +70,7 @@ public class AssertionsJpaTest {
 	public void testNotExistsInDatabase_happyPath() {
 
 		assertAll(() -> {
-			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, new NoteDE().setUuid("uuid"));
+			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, new NoteDE().setUuid("fake_UUID"));
 			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, NoteDE.class, "fake_IDENTITY");
 		});
 	}

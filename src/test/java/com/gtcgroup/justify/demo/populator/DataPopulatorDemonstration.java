@@ -26,22 +26,19 @@
 
 package com.gtcgroup.justify.demo.populator;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import com.gtcgroup.justify.core.rulechain.JstRuleChain;
-import com.gtcgroup.justify.core.si.JstRuleChainSI;
-import com.gtcgroup.justify.jpa.po.JstFindJpaPO;
-import com.gtcgroup.justify.jpa.rm.JstFindJpaRM;
-import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
-import com.gtcgroup.justify.jpa.test.assertion.AssertionsJPA;
-import com.gtcgroup.justify.quickstart.de.QuickStartDE;
-import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
-import com.gtcgroup.justify.quickstart.populator.QuickStartDataPopulator;
+import com.gtcgroup.justify.core.test.extension.JstConfigureTestLogToConsole;
+import com.gtcgroup.justify.jpa.test.extension.JstConfigureTestJPA;
+import com.gtcgroup.justify.quickstart.populator.ConfigureJustifyWithPopulatorPO;
 
 /**
  * This demonstration class simply creates a record on the in-memory database.
- * Read through the console log to see the "INSERT" statement.
+ * Read through the console log to see the how quickly a database can be
+ * launched, table created, and an entity "INSERT" completed. The performance
+ * for this approach is surprisingly scalable.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -51,29 +48,14 @@ import com.gtcgroup.justify.quickstart.populator.QuickStartDataPopulator;
  * @author Marvin Toll
  * @since v3.0
  */
-@SuppressWarnings("all")
+@JstConfigureTestLogToConsole
+@JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
+@SuppressWarnings("static-method")
 public class DataPopulatorDemonstration {
 
-
-	public JstRuleChainSI ruleChain = JstRuleChain.outerRule(false).around(JstConfigureJpaRule
-			.withPersistence(ConstantsQuickStart.JUSTIFY_PU).withDataPopulators(QuickStartDataPopulator.class));
-
 	@Test
-	public void demonstrateFind_using_RM() {
+	public void testLaunch() {
 
-		final JstFindJpaPO findPO = JstFindJpaPO.withFind(true, false)
-				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withEntityClass(QuickStartDE.class)
-				.withEntityIdentity(ConstantsQuickStart.QUICKSTART_NOTE_UUID);
-
-		final QuickStartDE quickStartDE = JstFindJpaRM.find(findPO);
-
-		Assertions.assertThat(quickStartDE).isNotNull();
-	}
-
-	@Test
-	public void demonstrateList_using_powerful_assert() {
-
-		AssertionsJPA.assertExistsInDatabaseWithListElement(ConstantsQuickStart.JUSTIFY_PU,
-				QuickStartDataPopulator.quickStartList, ConstantsQuickStart.QUICKSTART_NOTE_UUID);
+		assertTrue(true);
 	}
 }

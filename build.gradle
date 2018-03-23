@@ -66,3 +66,12 @@ dependencies {
         exclude group: 'junit', module: 'junit'
     }
 }
+
+test {
+    useJUnitPlatform {
+        excludeTags 'intentional'
+        includeEngines 'junit-jupiter'
+    }
+
+    failFast = false
+}

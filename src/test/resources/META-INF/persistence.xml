@@ -11,9 +11,11 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 
 		<!-- DOMAIN ENTITIES -->
 
+		<class>com.gtcgroup.justify.quickstart.de.BookingDE</class>
+		<class>com.gtcgroup.justify.quickstart.de.CustomerDE</class>
 		<class>com.gtcgroup.justify.quickstart.de.NoteDE</class>
 		
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 		<properties>
 
