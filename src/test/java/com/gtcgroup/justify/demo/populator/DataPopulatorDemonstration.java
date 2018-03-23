@@ -1,7 +1,7 @@
 /*
  * [Licensed per the Open Source "MIT License".]
  *
- * Copyright (c) 2006 - 2017 by
+ * Copyright (c) 2006 - 2018 by
  * Global Technology Consulting Group, Inc. at
  * http://gtcGroup.com
  *
@@ -26,26 +26,25 @@
 
 package com.gtcgroup.justify.demo.populator;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import com.gtcgroup.justify.core.rulechain.JstRuleChain;
 import com.gtcgroup.justify.core.si.JstRuleChainSI;
-import com.gtcgroup.justify.demo.de.QuickStartDE;
-import com.gtcgroup.justify.demo.populator.ConstantsQuickStart;
-import com.gtcgroup.justify.demo.populator.QuickStartDataPopulator;
-import com.gtcgroup.justify.jpa.assertions.AssertionsJPA;
 import com.gtcgroup.justify.jpa.po.JstFindJpaPO;
 import com.gtcgroup.justify.jpa.rm.JstFindJpaRM;
 import com.gtcgroup.justify.jpa.rule.JstConfigureJpaRule;
+import com.gtcgroup.justify.jpa.test.assertion.AssertionsJPA;
+import com.gtcgroup.justify.quickstart.de.QuickStartDE;
+import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
+import com.gtcgroup.justify.quickstart.populator.QuickStartDataPopulator;
 
 /**
  * This demonstration class simply creates a record on the in-memory database.
  * Read through the console log to see the "INSERT" statement.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
- * Copyright (c) 2006 - 2017 by Global Technology Consulting Group, Inc. at
+ * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
  * <a href="http://gtcGroup.com">gtcGroup.com </a>.
  * </p>
  *
@@ -64,7 +63,7 @@ public class DataPopulatorDemonstration {
 
 		final JstFindJpaPO findPO = JstFindJpaPO.withFind(true, false)
 				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withEntityClass(QuickStartDE.class)
-				.withEntityIdentity(ConstantsQuickStart.QUICKSTART_DE_UUID);
+				.withEntityIdentity(ConstantsQuickStart.QUICKSTART_NOTE_UUID);
 
 		final QuickStartDE quickStartDE = JstFindJpaRM.find(findPO);
 
@@ -75,6 +74,6 @@ public class DataPopulatorDemonstration {
 	public void demonstrateList_using_powerful_assert() {
 
 		AssertionsJPA.assertExistsInDatabaseWithListElement(ConstantsQuickStart.JUSTIFY_PU,
-				QuickStartDataPopulator.quickStartList, ConstantsQuickStart.QUICKSTART_DE_UUID);
+				QuickStartDataPopulator.quickStartList, ConstantsQuickStart.QUICKSTART_NOTE_UUID);
 	}
 }

@@ -11,7 +11,9 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 
 		<!-- DOMAIN ENTITIES -->
 
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<class>com.gtcgroup.justify.quickstart.de.NoteDE</class>
+		
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties>
 
@@ -25,7 +27,6 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 				value="org.eclipse.persistence.platform.database.H2Platform" />
 
 			<!-- This section declares EclipseLink JPA Extensions for Logging. -->
-			<!-- Note: Comment out the JavaLogger for additional logging. /> -->
 			<!-- <property name="eclipselink.logging.logger" value="JavaLogger" />  -->			
 			<property name="eclipselink.logging.level" value="FINE" />
 			<property name="eclipselink.logging.timestamp" value="false" />
@@ -41,17 +42,4 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 
 	</persistence-unit>
 
-	<persistence-unit name="fake-pu" transaction-type="RESOURCE_LOCAL">
-
-		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-
-		<!-- DOMAIN ENTITIES -->
-
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
-
-		<properties>
-
-		</properties>
-
-	</persistence-unit>
 </persistence>

@@ -1,7 +1,7 @@
 /*
  * [Licensed per the Open Source "MIT License".]
  *
- * Copyright (c) 2006 - 2017 by
+ * Copyright (c) 2006 - 2018 by
  * Global Technology Consulting Group, Inc. at
  * http://gtcGroup.com
  *
@@ -23,24 +23,25 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.demo.populator;
+package com.gtcgroup.justify.quickstart.populator;
 
 /**
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
- * Copyright (c) 2006 - 2017 by Global Technology Consulting Group, Inc. at
+ * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
  * <a href="http://gtcGroup.com">gtcGroup.com </a>.
  * </p>
  *
  * @author Marvin Toll
  * @since v3.0
  */
-@SuppressWarnings("javadoc")
 public enum ConstantsQuickStart {
 
 	INSTANCE;
 
 	public static final String JUSTIFY_PU = "justify-pu";
 
-	public static final String QUICKSTART_DE_UUID = "quickStartUUID";
+	public static final String QUICKSTART_NOTE_UUID = "quickStartUUID";
+
+	public final static String QUICKSTART_NOTE_TEXT = "Test Text One";
 
 }

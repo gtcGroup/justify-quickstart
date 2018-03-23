@@ -1,7 +1,7 @@
 /*
  * [Licensed per the Open Source "MIT License".]
  *
- * Copyright (c) 2006 - 2017 by
+ * Copyright (c) 2006 - 2018 by
  * Global Technology Consulting Group, Inc. at
  * http://gtcGroup.com
  *
@@ -23,31 +23,48 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.demo.de;
+package com.gtcgroup.justify.quickstart.populator;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-@Table(name = "CUSTOMER")
-@AttributeOverrides({ @AttributeOverride(name = "uuid", column = @Column(name = "CUSTOMER_UUID")) })
-@SuppressWarnings("javadoc")
-public class CustomerDE extends BaseUuidDE {
+import com.gtcgroup.justify.jpa.test.populator.JstBaseDataPopulator;
+import com.gtcgroup.justify.quickstart.de.NoteDE;
 
-	private static final long serialVersionUID = 1L;
+/**
+ * Test Class
+ *
+ * <p style="font-family:Verdana; font-size:10px; font-style:italic">
+ * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
+ * <a href="http://gtcGroup.com">gtcGroup.com </a>.
+ * </p>
+ *
+ * @author Marvin Toll
+ * @since v3.0
+ */
+public class NoteDataPopulator extends JstBaseDataPopulator {
 
-	@Column(name = "CUSTOMER_EMAIL_ADDRESS")
-	private String emailAddress;
+	private static final NoteDE notePopulated = new NoteDE().setText(ConstantsQuickStart.QUICKSTART_NOTE_TEXT)
+			.setUuid(ConstantsQuickStart.QUICKSTART_NOTE_UUID);
 
-	public String getEmailAddress() {
-		return this.emailAddress;
+	public static NoteDE getNotePopulated() {
+		return notePopulated;
 	}
 
-	public void setEmailAddress(final String emailAddress) {
+	private final List<Object> populatedList = new ArrayList<>();
 
-		this.emailAddress = emailAddress;
+	public List<Object> getPopulatedList() {
+		return this.populatedList;
+	}
+
+	/**
+	 * @see JstBaseDataPopulator#populateCreateListTM(JstQueryJpaRM)
+	 */
+	@Override
+	public List<Object> populateCreateListTM(final String persistenceUnitName) {
+
+		this.populatedList.add(notePopulated);
+
+		return this.populatedList;
 	}
 }

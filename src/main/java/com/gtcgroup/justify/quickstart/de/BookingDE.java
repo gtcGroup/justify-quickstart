@@ -1,7 +1,7 @@
 /*
  * [Licensed per the Open Source "MIT License".]
  *
- * Copyright (c) 2006 - 2017 by
+ * Copyright (c) 2006 - 2018 by
  * Global Technology Consulting Group, Inc. at
  * http://gtcGroup.com
  *
@@ -23,7 +23,10 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.demo.de;
+package com.gtcgroup.justify.quickstart.de;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -34,10 +37,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.gtcgroup.justify.jpa.de.BaseUuidDE;
+
 @Entity
 @Table(name = "BOOKING")
 @AttributeOverrides({ @AttributeOverride(name = "uuid", column = @Column(name = "BOOKING_UUID")) })
-@SuppressWarnings("javadoc")
 public class BookingDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
@@ -49,17 +53,15 @@ public class BookingDE extends BaseUuidDE {
 	@JoinColumn(name = "NOTE_UUID", referencedColumnName = "NOTE_UUID")
 	private NoteDE note;
 
-	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.PERSIST })
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
 	@JoinColumn(name = "CUSTOMER_UUID", referencedColumnName = "CUSTOMER_UUID")
 	private CustomerDE customer;
+
+	private final List<Object> unmappedList = new ArrayList<>();
 
 	public CustomerDE getCustomer() {
 
 		return this.customer;
-	}
-
-	public CustomerDE getCustomerDE() {
-		return getCustomer();
 	}
 
 	public String getDestination() {
@@ -70,18 +72,16 @@ public class BookingDE extends BaseUuidDE {
 		return this.note;
 	}
 
-	public NoteDE getNoteDE() {
-		return getNote();
+	public List<Object> getUnmappedList() {
+
+		this.unmappedList.add(this);
+		return this.unmappedList;
 	}
 
 	public BookingDE setCustomer(final CustomerDE customerDE) {
 
 		this.customer = customerDE;
 		return this;
-	}
-
-	public BookingDE setCustomerDE(final CustomerDE customerDE) {
-		return setCustomer(customerDE);
 	}
 
 	public BookingDE setDestination(final String destination) {

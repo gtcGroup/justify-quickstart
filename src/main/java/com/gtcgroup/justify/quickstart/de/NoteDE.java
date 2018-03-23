@@ -1,7 +1,7 @@
 /*
  * [Licensed per the Open Source "MIT License".]
  *
- * Copyright (c) 2006 - 2017 by
+ * Copyright (c) 2006 - 2018 by
  * Global Technology Consulting Group, Inc. at
  * http://gtcGroup.com
  *
@@ -23,10 +23,11 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.demo.de;
+package com.gtcgroup.justify.quickstart.de;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -34,12 +35,19 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.eclipse.persistence.annotations.Cache;
+
+import com.gtcgroup.justify.jpa.de.BaseUuidDE;
+
 @Entity
 @Table(name = "NOTE")
-@AttributeOverrides({ @AttributeOverride(name = "uuid", column = @Column(name = "NOTE_UUID")) })
-@SuppressWarnings("javadoc")
+@AttributeOverrides(@AttributeOverride(name = "uuid", column = @Column(name = "NOTE_UUID")))
+@Cacheable
+@Cache(size = 100)
 @NamedQueries({ @NamedQuery(name = "queryNoteList", query = "SELECT note FROM NoteDE note"),
-		@NamedQuery(name = "queryNoteSingle", query = "SELECT note FROM NoteDE note WHERE note.text = 'test1Text' "), })
+		@NamedQuery(name = "queryNoteSingleOne", query = "SELECT note FROM NoteDE note WHERE note.text = 'testTextOne' "),
+		@NamedQuery(name = "queryNoteSingleTwo", query = "SELECT note FROM NoteDE note WHERE note.text = 'testTextTwo' "),
+		@NamedQuery(name = "queryNoteListWithStringParameter", query = "SELECT note FROM NoteDE note WHERE note.text = :text"), })
 public class NoteDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
@@ -50,11 +58,19 @@ public class NoteDE extends BaseUuidDE {
 	private String text;
 
 	@Transient
-	private final String string = NoteDE.STRING;
+	private String string = NoteDE.STRING;
 
 	public String getString() {
 
 		return this.string;
+	}
+
+	/**
+	 * @return String
+	 */
+	@SuppressWarnings("static-method")
+	public String getSTRING() {
+		return NoteDE.STRING;
 	}
 
 	public String getText() {
@@ -68,10 +84,27 @@ public class NoteDE extends BaseUuidDE {
 		throw new RuntimeException();
 	}
 
+	/**
+	 * @param string
+	 * @return NothingBean.java
+	 */
+	public NoteDE setString(final String string) {
+		this.string = string;
+		return this;
+	}
+
+	/**
+	 * @param sTRING
+	 * @return NothingBean.java
+	 */
+	public NoteDE setSTRING(final String sTRING) {
+		NoteDE.STRING = sTRING;
+		return this;
+	}
+
 	public NoteDE setText(final String text) {
 
 		this.text = text;
 		return this;
 	}
-
 }
