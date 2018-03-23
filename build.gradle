@@ -1,7 +1,7 @@
 /*
  * [Licensed per the Open Source "MIT License".]
  *
- * Copyright (c) 2006 - 2017 by
+ * Copyright (c) 2006 - 2018 by
  * Global Technology Consulting Group, Inc. at
  * http://gtcGroup.com
  *
@@ -24,7 +24,29 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-apply plugin: 'java'
+/*
+ * justify-quickstart
+ */ 
+
+apply plugin: 'java-library' 
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+apply plugin: 'eclipse-wtp'
+
+def javaVersion = JavaVersion.VERSION_1_8;
+sourceCompatibility = javaVersion;
+targetCompatibility = javaVersion;
+
+task printProps {
+    doLast {
+        println commandLineProjectProp
+        println gradlePropertiesProp
+        println systemProjectProp
+        println envProjectProp
+        println System.properties['system']
+    }
+}
 
 repositories {
 
@@ -33,8 +55,8 @@ repositories {
 
 dependencies {
 
-	//compile 'com.gtcgroup:justify-jpa:8.+'
+	compile 'com.gtcgroup:justify-jpa:8.+'
 	
-    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.+'
-    compile 'com.h2database:h2:1.4.+'
+    //compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.+'
+    //compile 'com.h2database:h2:1.4.+'
 }
