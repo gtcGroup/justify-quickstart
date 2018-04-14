@@ -55,16 +55,8 @@ repositories {
 
 dependencies {
 
-	compile 'com.gtcgroup:justify-jpa:8.+'
+	compile 'com.gtcgroup:justify-jpa:8.5.0-alpha2'
 	
-	testCompile 'com.h2database:h2:1.4.197'
-	
-    testCompile("org.junit.platform:junit-platform-launcher:1.1.0") {
-        exclude group: 'junit', module: 'junit'
-    }
-    testCompile("org.junit.jupiter:junit-jupiter-engine:5.1.0") {
-        exclude group: 'junit', module: 'junit'
-    }
 }
 
 test {

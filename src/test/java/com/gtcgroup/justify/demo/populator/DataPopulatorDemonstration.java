@@ -48,6 +48,7 @@ import com.gtcgroup.justify.quickstart.populator.ConfigureJustifyWithPopulatorPO
  * @author Marvin Toll
  * @since v3.0
  */
+@SuppressWarnings("static-method")
 @JstConfigureTestLogToConsole
 @JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
 public class DataPopulatorDemonstration {

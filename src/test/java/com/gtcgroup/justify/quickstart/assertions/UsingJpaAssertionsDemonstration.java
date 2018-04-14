@@ -50,6 +50,7 @@ import com.gtcgroup.justify.quickstart.populator.NoteDataPopulator;
  * @author Marvin Toll
  * @since v3.0
  */
+@SuppressWarnings("static-method")
 @JstConfigureTestLogToConsole
 @JstConfigureTestUserId(userId = "assertionsId")
 @JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)

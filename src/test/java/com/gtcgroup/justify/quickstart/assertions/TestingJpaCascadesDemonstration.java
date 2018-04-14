@@ -35,8 +35,8 @@ import org.opentest4j.AssertionFailedError;
 import com.gtcgroup.justify.core.test.extension.JstConfigureTestLogToConsole;
 import com.gtcgroup.justify.core.test.extension.JstConfigureTestUserId;
 import com.gtcgroup.justify.jpa.test.assertion.AssertionsJPA;
+import com.gtcgroup.justify.jpa.test.assertion.JstAssertCascadePO;
 import com.gtcgroup.justify.jpa.test.extension.JstConfigureTestJPA;
-import com.gtcgroup.justify.jpa.test.po.JstAssertCascadePO;
 import com.gtcgroup.justify.quickstart.de.BookingDE;
 import com.gtcgroup.justify.quickstart.de.CustomerDE;
 import com.gtcgroup.justify.quickstart.de.NoteDE;
@@ -54,6 +54,7 @@ import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
  *
  * @author Marvin Toll
  */
+@SuppressWarnings("static-method")
 @JstConfigureTestLogToConsole
 @JstConfigureTestUserId
 @JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
