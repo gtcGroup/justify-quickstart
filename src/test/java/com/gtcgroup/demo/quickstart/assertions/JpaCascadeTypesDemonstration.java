@@ -53,7 +53,6 @@ import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
  *
  * @author Marvin Toll
  */
-@SuppressWarnings("static-method")
 @JstConfigureTestLogToConsole
 @JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
 public class JpaCascadeTypesDemonstration {

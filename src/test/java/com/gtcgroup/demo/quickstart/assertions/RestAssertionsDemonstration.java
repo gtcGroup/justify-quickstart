@@ -53,7 +53,6 @@ import com.sun.research.ws.wadl.HTTPMethods;
  * @author Marvin Toll
  * @since v3.0
  */
-@SuppressWarnings("static-method")
 @JstConfigureTestLogToConsole
 @JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
 @JstConfigureTestingREST(configureTestRestPO = ConfigureTestingRestPO.class)

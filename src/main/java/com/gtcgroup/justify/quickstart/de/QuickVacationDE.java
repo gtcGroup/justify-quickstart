@@ -53,6 +53,11 @@ public class QuickVacationDE extends BaseUuidDE {
 	@JoinColumn(name = "CUSTOMER_UUID", referencedColumnName = "CUSTOMER_UUID")
 	private QuickCustomerDE customer;
 
+	@Override
+	public boolean equals(final Object obj) {
+		return super.equals(obj);
+	}
+
 	public QuickCustomerDE getCustomer() {
 
 		return this.customer;

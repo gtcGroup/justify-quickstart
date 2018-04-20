@@ -44,6 +44,11 @@ public class QuickNoteDE extends BaseUuidDE {
 	@Column(name = "NOTE_TEXT")
 	private String text;
 
+	@Override
+	public boolean equals(final Object obj) {
+		return super.equals(obj);
+	}
+
 	public String getText() {
 
 		return this.text;

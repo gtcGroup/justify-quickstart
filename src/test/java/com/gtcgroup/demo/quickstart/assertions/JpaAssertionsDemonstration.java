@@ -50,7 +50,6 @@ import com.gtcgroup.justify.quickstart.populator.QuickStartTestingDataPopulator;
  * @author Marvin Toll
  * @since v3.0
  */
-@SuppressWarnings("static-method")
 @JstConfigureTestLogToConsole
 @JstConfigureTestUserId(userId = "assertionsId")
 @JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
@@ -60,7 +59,8 @@ public class JpaAssertionsDemonstration {
 	public void testExistsInDatabase_happyPath() {
 
 		assertAll(() -> {
-			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, QuickStartTestingDataPopulator.getNotePopulated());
+			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU,
+					QuickStartTestingDataPopulator.getNotePopulated());
 			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, QuickNoteDE.class,
 					ConstantsQuickStart.QUICKSTART_NOTE_UUID);
 		});

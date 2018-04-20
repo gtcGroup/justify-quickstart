@@ -42,6 +42,11 @@ public class QuickCustomerDE extends BaseUuidDE {
 	@Column(name = "CUSTOMER_EMAIL_ADDRESS")
 	private String emailAddress;
 
+	@Override
+	public boolean equals(final Object obj) {
+		return super.equals(obj);
+	}
+
 	public String getEmailAddress() {
 		return this.emailAddress;
 	}
