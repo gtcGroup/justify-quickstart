@@ -51,7 +51,6 @@ import com.gtcgroup.justify.quickstart.to.NoteTO;
  * @author Marvin Toll
  * @since 8.5
  */
-@SuppressWarnings("static-method")
 @Path("/entity")
 public class QuickStartRestIC extends JstBaseIC {
 
