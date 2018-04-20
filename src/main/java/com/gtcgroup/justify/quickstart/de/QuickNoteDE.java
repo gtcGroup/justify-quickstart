@@ -26,27 +26,18 @@
 package com.gtcgroup.justify.quickstart.de;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import org.eclipse.persistence.annotations.Cache;
 
 import com.gtcgroup.justify.jpa.de.BaseUuidDE;
 
 @Entity
 @Table(name = "NOTE")
 @AttributeOverride(name = "uuid", column = @Column(name = "NOTE_UUID"))
-@Cacheable
-@Cache(size = 100)
-@NamedQueries({ @NamedQuery(name = "queryNoteList", query = "SELECT note FROM NoteDE note"),
-		@NamedQuery(name = "queryNoteSingleOne", query = "SELECT note FROM NoteDE note WHERE note.text = 'testTextOne' "),
-		@NamedQuery(name = "queryNoteSingleTwo", query = "SELECT note FROM NoteDE note WHERE note.text = 'testTextTwo' "),
-		@NamedQuery(name = "queryNoteListWithStringParameter", query = "SELECT note FROM NoteDE note WHERE note.text = :text"), })
-public class NoteDE extends BaseUuidDE {
+@NamedQuery(name = "queryNoteList", query = "SELECT note FROM QuickNoteDE note")
+public class QuickNoteDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
 
@@ -58,9 +49,8 @@ public class NoteDE extends BaseUuidDE {
 		return this.text;
 	}
 
-	public NoteDE setText(final String text) {
+	public void setText(final String text) {
 
 		this.text = text;
-		return this;
 	}
 }

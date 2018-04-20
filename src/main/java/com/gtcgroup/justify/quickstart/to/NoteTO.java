@@ -23,25 +23,24 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.populator;
+package com.gtcgroup.justify.quickstart.to;
 
-/**
- * <p style="font-family:Verdana; font-size:10px; font-style:italic">
- * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
- * <a href="http://gtcGroup.com">gtcGroup.com </a>.
- * </p>
- *
- * @author Marvin Toll
- * @since v3.0
- */
-public enum ConstantsQuickStart {
+import com.gtcgroup.justify.core.base.JstBaseTO;
 
-	INSTANCE;
+public class NoteTO extends JstBaseTO {
 
-	public static final String JUSTIFY_PU = "quickstart-pu";
+	private static final long serialVersionUID = 1L;
 
-	public static final String QUICKSTART_NOTE_UUID = "quickStartUUID";
+	private String text;
 
-	public static final String QUICKSTART_NOTE_TEXT = "Test Text One";
+	public String getText() {
 
+		return this.text;
+	}
+
+	public NoteTO setText(final String text) {
+
+		this.text = text;
+		return this;
+	}
 }

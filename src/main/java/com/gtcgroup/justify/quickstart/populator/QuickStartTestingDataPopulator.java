@@ -28,8 +28,10 @@ package com.gtcgroup.justify.quickstart.populator;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gtcgroup.justify.jpa.test.populator.JstBaseDataPopulator;
-import com.gtcgroup.justify.quickstart.de.NoteDE;
+import com.gtcgroup.justify.jpa.testing.populator.JstBaseDataPopulator;
+import com.gtcgroup.justify.quickstart.de.QuickCustomerDE;
+import com.gtcgroup.justify.quickstart.de.QuickNoteDE;
+import com.gtcgroup.justify.quickstart.de.QuickVacationDE;
 
 /**
  * Test Class
@@ -42,13 +44,30 @@ import com.gtcgroup.justify.quickstart.de.NoteDE;
  * @author Marvin Toll
  * @since v3.0
  */
-public class NoteDataPopulator extends JstBaseDataPopulator {
+public class QuickStartTestingDataPopulator extends JstBaseDataPopulator {
 
-	private static final NoteDE notePopulated = new NoteDE().setText(ConstantsQuickStart.QUICKSTART_NOTE_TEXT)
-			.setUuid(ConstantsQuickStart.QUICKSTART_NOTE_UUID);
+	private static QuickNoteDE note;
 
-	public static NoteDE getNotePopulated() {
-		return notePopulated;
+	public static QuickNoteDE getNotePopulated() {
+
+		if (null == note) {
+			final QuickNoteDE quickNoteDE = new QuickNoteDE();
+			quickNoteDE.setUuid(ConstantsQuickStart.QUICKSTART_NOTE_UUID);
+			quickNoteDE.setText(ConstantsQuickStart.QUICKSTART_NOTE_TEXT);
+			QuickStartTestingDataPopulator.note = quickNoteDE;
+		}
+		return note;
+	}
+
+	private static QuickVacationDE populateVacation() {
+
+		final QuickCustomerDE quickCustomerDE = new QuickCustomerDE();
+
+		final QuickVacationDE quickVacationDE = new QuickVacationDE();
+		quickVacationDE.setNote(getNotePopulated());
+		quickVacationDE.setCustomer(quickCustomerDE);
+
+		return quickVacationDE;
 	}
 
 	private final List<Object> populatedList = new ArrayList<>();
@@ -63,7 +82,7 @@ public class NoteDataPopulator extends JstBaseDataPopulator {
 	@Override
 	public List<Object> populateCreateListTM(final String persistenceUnitName) {
 
-		this.populatedList.add(notePopulated);
+		this.populatedList.add(populateVacation());
 
 		return this.populatedList;
 	}

@@ -23,25 +23,46 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.populator;
+package com.gtcgroup.justify.quickstart.exception;
+
+import com.gtcgroup.justify.core.base.JstBaseRuntimeException;
+import com.gtcgroup.justify.core.helper.internal.SystemOutLoggingUtilHelper;
+import com.gtcgroup.justify.core.po.JstExceptionPO;
 
 /**
+ * This {@link RuntimeException} logs using {@link System}.out.
+ *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
  * <a href="http://gtcGroup.com">gtcGroup.com </a>.
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since v.6.0
  */
-public enum ConstantsQuickStart {
+public class QuickStartException extends JstBaseRuntimeException {
 
-	INSTANCE;
+	private static final long serialVersionUID = 1L;
 
-	public static final String JUSTIFY_PU = "quickstart-pu";
+	/**
+	 * Constructor
+	 */
+	public QuickStartException(final JstExceptionPO exceptionPO) {
 
-	public static final String QUICKSTART_NOTE_UUID = "quickStartUUID";
+		super(exceptionPO);
+	}
 
-	public static final String QUICKSTART_NOTE_TEXT = "Test Text One";
+	/**
+	 * Constructor
+	 */
+	public QuickStartException(final JstExceptionPO exceptionPO, final Throwable exception) {
 
+		super(exceptionPO, exception);
+	}
+
+	@Override
+	protected void logExceptionTM(final JstExceptionPO exceptionPO) {
+		SystemOutLoggingUtilHelper.logException(exceptionPO);
+
+	}
 }

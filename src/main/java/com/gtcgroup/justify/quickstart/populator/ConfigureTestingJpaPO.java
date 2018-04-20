@@ -28,8 +28,8 @@ package com.gtcgroup.justify.quickstart.populator;
 import java.util.List;
 import java.util.Map;
 
-import com.gtcgroup.justify.jpa.test.extension.JstConfigureTestJpaPO;
-import com.gtcgroup.justify.jpa.test.populator.JstBaseDataPopulator;
+import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJpaPO;
+import com.gtcgroup.justify.jpa.testing.populator.JstBaseDataPopulator;
 
 /**
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
@@ -40,7 +40,7 @@ import com.gtcgroup.justify.jpa.test.populator.JstBaseDataPopulator;
  * @author Marvin Toll
  * @since 8.5
  */
-public class ConfigureJustifyWithPopulatorPO extends JstConfigureTestJpaPO {
+public class ConfigureTestingJpaPO extends JstConfigureTestingJpaPO {
 
 	@Override
 	protected String definePersistenceUnitNameTM() {
@@ -48,8 +48,8 @@ public class ConfigureJustifyWithPopulatorPO extends JstConfigureTestJpaPO {
 	}
 
 	@Override
-	protected void populateDataPopulatorListTM(final List<Class<? extends JstBaseDataPopulator>> dataPopulatorList) {
-		dataPopulatorList.add(NoteDataPopulator.class);
+	protected void populateCreateListTM(final List<Class<? extends JstBaseDataPopulator>> dataPopulatorList) {
+		dataPopulatorList.add(QuickStartTestingDataPopulator.class);
 	}
 
 	@Override

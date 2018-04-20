@@ -24,50 +24,38 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/*
- * justify-quickstart
- */ 
+package com.gtcgroup.demo.quickstart.populator;
 
-apply plugin: 'java-library' 
-apply plugin: 'maven'
-apply plugin: 'signing'
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-apply plugin: 'eclipse-wtp'
+import org.junit.jupiter.api.Test;
 
-def javaVersion = JavaVersion.VERSION_1_8;
-sourceCompatibility = javaVersion;
-targetCompatibility = javaVersion;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
+import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
+import com.gtcgroup.justify.quickstart.populator.ConfigureTestingJpaPO;
 
-task printProps {
-    doLast {
-        println commandLineProjectProp
-        println gradlePropertiesProp
-        println systemProjectProp
-        println envProjectProp
-        println System.properties['system']
-    }
-}
+/**
+ * This demonstration class simply persists data in the in-memory database. Read
+ * through the console log to see how quickly a database can be launched, tables
+ * created, and data inserted. The performance for this approach is surprisingly
+ * scalable.
+ *
+ * <p style="font-family:Verdana; font-size:10px; font-style:italic">
+ * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
+ * <a href="http://gtcGroup.com">gtcGroup.com </a>.
+ * </p>
+ *
+ * @author Marvin Toll
+ * @since v3.0
+ */
+@SuppressWarnings("static-method")
+@JstConfigureTestLogToConsole
+@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
+public class DataPopulatorDemonstration {
 
-repositories {
+	@Test
+	public void testConfigureJPA() {
 
-    mavenCentral()
-}
-
-dependencies {
-
-    //compile project(':justify-jpa')
-    //compile project(':justify-rest')
-	
-	compile 'com.gtcgroup:justify-jpa:8.5.0-alpha4'
-	compile 'com.gtcgroup:justify-rest:8.5.0-alpha4'
-	
-}
-
-test {
-    useJUnitPlatform {
-        excludeTags 'intentional'
-        includeEngines 'junit-jupiter'
-    }
-
-    failFast = false
+		assertTrue(true);
+	}
 }

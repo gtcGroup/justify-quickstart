@@ -23,23 +23,23 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.assertions;
+package com.gtcgroup.demo.quickstart.assertions;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.Test;
 
-import com.gtcgroup.justify.core.test.extension.JstConfigureTestLogToConsole;
-import com.gtcgroup.justify.core.test.extension.JstConfigureTestUserId;
-import com.gtcgroup.justify.jpa.test.assertion.AssertionsJPA;
-import com.gtcgroup.justify.jpa.test.extension.JstConfigureTestJPA;
-import com.gtcgroup.justify.quickstart.de.NoteDE;
-import com.gtcgroup.justify.quickstart.populator.ConfigureJustifyWithPopulatorPO;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestUserId;
+import com.gtcgroup.justify.jpa.testing.assertion.AssertionsJPA;
+import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
+import com.gtcgroup.justify.quickstart.de.QuickNoteDE;
+import com.gtcgroup.justify.quickstart.populator.ConfigureTestingJpaPO;
 import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
-import com.gtcgroup.justify.quickstart.populator.NoteDataPopulator;
+import com.gtcgroup.justify.quickstart.populator.QuickStartTestingDataPopulator;
 
 /**
- * This test class demonstrates JPA convenience assertions using the
+ * This class demonstrates JPA convenience assertions using the
  * {@link AssertionsJPA} enum.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
@@ -53,15 +53,15 @@ import com.gtcgroup.justify.quickstart.populator.NoteDataPopulator;
 @SuppressWarnings("static-method")
 @JstConfigureTestLogToConsole
 @JstConfigureTestUserId(userId = "assertionsId")
-@JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
-public class UsingJpaAssertionsDemonstration {
+@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
+public class JpaAssertionsDemonstration {
 
 	@Test
 	public void testExistsInDatabase_happyPath() {
 
 		assertAll(() -> {
-			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, NoteDataPopulator.getNotePopulated());
-			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, NoteDE.class,
+			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, QuickStartTestingDataPopulator.getNotePopulated());
+			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, QuickNoteDE.class,
 					ConstantsQuickStart.QUICKSTART_NOTE_UUID);
 		});
 	}
@@ -69,9 +69,12 @@ public class UsingJpaAssertionsDemonstration {
 	@Test
 	public void testNotExistsInDatabase_happyPath() {
 
+		final QuickNoteDE note = new QuickNoteDE();
+		note.setUuid("fake_UUID");
+
 		assertAll(() -> {
-			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, new NoteDE().setUuid("fake_UUID"));
-			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, NoteDE.class, "fake_IDENTITY");
+			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, note);
+			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, QuickNoteDE.class, "fake_IDENTITY");
 		});
 	}
 }

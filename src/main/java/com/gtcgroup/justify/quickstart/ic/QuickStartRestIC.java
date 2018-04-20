@@ -24,21 +24,24 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.gtcgroup.justify.demo.populator;
+package com.gtcgroup.justify.quickstart.ic;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import com.gtcgroup.justify.core.test.extension.JstConfigureTestLogToConsole;
-import com.gtcgroup.justify.jpa.test.extension.JstConfigureTestJPA;
-import com.gtcgroup.justify.quickstart.populator.ConfigureJustifyWithPopulatorPO;
+import com.gtcgroup.justify.core.base.JstBaseIC;
+import com.gtcgroup.justify.quickstart.bf.QuickBF;
+import com.gtcgroup.justify.quickstart.de.QuickNoteDE;
+import com.gtcgroup.justify.quickstart.to.NoteTO;
 
 /**
- * This demonstration class simply creates a record on the in-memory database.
- * Read through the console log to see the how quickly a database can be
- * launched, table created, and an entity "INSERT" completed. The performance
- * for this approach is surprisingly scalable.
+ * An I/O Controller class used for demonstration.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -46,16 +49,30 @@ import com.gtcgroup.justify.quickstart.populator.ConfigureJustifyWithPopulatorPO
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since 8.5
  */
 @SuppressWarnings("static-method")
-@JstConfigureTestLogToConsole
-@JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
-public class DataPopulatorDemonstration {
+@Path("/entity")
+public class QuickStartRestIC extends JstBaseIC {
 
-	@Test
-	public void testLaunch() {
+	@GET
+	public Response getList() {
 
-		assertTrue(true);
+		final GenericEntity<List<QuickNoteDE>> genericEntity = new GenericEntity<List<QuickNoteDE>>(
+				QuickBF.getNoteList()) {
+			// Empty Block
+		};
+
+		return Response.ok(genericEntity).type(MediaType.APPLICATION_JSON).build();
+	}
+
+	@GET
+	@Path("/{uuid}")
+	public Response getSingle(@PathParam("uuid") final String uuid) {
+
+		final NoteTO note = new NoteTO();
+		note.setText(QuickBF.getNote(uuid).getText());
+
+		return Response.ok(note).type(MediaType.APPLICATION_JSON).build();
 	}
 }

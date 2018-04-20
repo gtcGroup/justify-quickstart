@@ -23,7 +23,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.assertions;
+package com.gtcgroup.demo.quickstart.assertions;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -32,20 +32,19 @@ import javax.persistence.OneToOne;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
-import com.gtcgroup.justify.core.test.extension.JstConfigureTestLogToConsole;
-import com.gtcgroup.justify.core.test.extension.JstConfigureTestUserId;
-import com.gtcgroup.justify.jpa.test.assertion.AssertionsJPA;
-import com.gtcgroup.justify.jpa.test.assertion.JstAssertCascadePO;
-import com.gtcgroup.justify.jpa.test.extension.JstConfigureTestJPA;
-import com.gtcgroup.justify.quickstart.de.BookingDE;
-import com.gtcgroup.justify.quickstart.de.CustomerDE;
-import com.gtcgroup.justify.quickstart.de.NoteDE;
-import com.gtcgroup.justify.quickstart.populator.ConfigureJustifyWithPopulatorPO;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
+import com.gtcgroup.justify.jpa.testing.assertion.AssertionsJPA;
+import com.gtcgroup.justify.jpa.testing.assertion.JstAssertCascadePO;
+import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
+import com.gtcgroup.justify.quickstart.de.QuickCustomerDE;
+import com.gtcgroup.justify.quickstart.de.QuickNoteDE;
+import com.gtcgroup.justify.quickstart.de.QuickVacationDE;
+import com.gtcgroup.justify.quickstart.populator.ConfigureTestingJpaPO;
 import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
 
 /**
- * This test class verifies the {@link BookingDE} cascade values within the
- * {@link OneToOne} annotations.
+ * This demonstration class verifies the {@link QuickVacationDE} cascade values
+ * within the {@link OneToOne} annotations.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -56,40 +55,39 @@ import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
  */
 @SuppressWarnings("static-method")
 @JstConfigureTestLogToConsole
-@JstConfigureTestUserId
-@JstConfigureTestJPA(configureTestJpaPO = ConfigureJustifyWithPopulatorPO.class)
-public class TestingJpaCascadesDemonstration {
+@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
+public class JpaCascadeTypesDemonstration {
 
 	private static final String GET_NOTE = "getNote";
 	private static final String GET_CUSTOMER = "getCustomer";
 
-	private static BookingDE populateBooking() {
+	private static QuickVacationDE populateVacation() {
 
-		final CustomerDE customerDE = new CustomerDE();
-		final NoteDE noteDE = new NoteDE();
+		final QuickCustomerDE quickCustomerDE = new QuickCustomerDE();
+		final QuickNoteDE quickNoteDE = new QuickNoteDE();
 
-		final BookingDE bookingDE = new BookingDE();
-		bookingDE.setNote(noteDE);
-		bookingDE.setCustomer(customerDE);
+		final QuickVacationDE quickVacationDE = new QuickVacationDE();
+		quickVacationDE.setNote(quickNoteDE);
+		quickVacationDE.setCustomer(quickCustomerDE);
 
-		return bookingDE;
+		return quickVacationDE;
 	}
 
 	@Test
-	public void testCascadeTypesForBooking_customerCascadeAll_incorrect() {
+	public void testCascadeTypesForVacation_customerCascadeAll_incorrect() {
 
 		assertThrows(AssertionFailedError.class, () -> {
 			AssertionsJPA.assertCascadeTypes(JstAssertCascadePO.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU)
-					.withPopulatedEntity(populateBooking()).withCascadeAll(GET_NOTE, GET_CUSTOMER)
+					.withPopulatedEntity(populateVacation()).withCascadeAll(GET_NOTE, GET_CUSTOMER)
 					.withCleanupAfterVerification(GET_CUSTOMER));
 		});
 	}
 
 	@Test
-	public void testCascadeTypesForBooking_happyPath() {
+	public void testCascadeTypesForVacation_happyPath_usingConvenienceMethodForCascadeAll() {
 
 		final JstAssertCascadePO assertJpaPO = JstAssertCascadePO
-				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withPopulatedEntity(populateBooking())
+				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withPopulatedEntity(populateVacation())
 				.withCascadeAll(GET_NOTE).withCascadeAllExceptRemove(GET_CUSTOMER)
 				.withCleanupAfterVerification(GET_CUSTOMER);
 
@@ -97,10 +95,10 @@ public class TestingJpaCascadesDemonstration {
 	}
 
 	@Test
-	public void testCascadeTypesForBooking_happyPath_explicitPersistAndRemove() {
+	public void testCascadeTypesForVacation_happyPath_usingExplicitPersistAndRemoveMethods() {
 
 		final JstAssertCascadePO assertJpaPO = JstAssertCascadePO
-				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withPopulatedEntity(populateBooking())
+				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withPopulatedEntity(populateVacation())
 				.withCascadePersist(GET_NOTE).withCascadeRemove(GET_NOTE).withCascadeAllExceptRemove(GET_CUSTOMER)
 				.withCleanupAfterVerification(GET_CUSTOMER);
 

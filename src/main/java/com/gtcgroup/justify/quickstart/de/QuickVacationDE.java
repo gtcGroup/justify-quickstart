@@ -26,28 +26,58 @@
 package com.gtcgroup.justify.quickstart.de;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.gtcgroup.justify.jpa.de.BaseUuidDE;
 
 @Entity
-@Table(name = "CUSTOMER")
-@AttributeOverride(name = "uuid", column = @Column(name = "CUSTOMER_UUID"))
-public class CustomerDE extends BaseUuidDE {
+@Table(name = "VACATION")
+@AttributeOverride(name = "uuid", column = @Column(name = "VACATION_UUID"))
+public class QuickVacationDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "CUSTOMER_EMAIL_ADDRESS")
-	private String emailAddress;
+	@Column(name = "VACATION_DESTINATION")
+	private String destination;
 
-	public String getEmailAddress() {
-		return this.emailAddress;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "NOTE_UUID", referencedColumnName = "NOTE_UUID")
+	private QuickNoteDE note;
+
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+	@JoinColumn(name = "CUSTOMER_UUID", referencedColumnName = "CUSTOMER_UUID")
+	private QuickCustomerDE customer;
+
+	public QuickCustomerDE getCustomer() {
+
+		return this.customer;
 	}
 
-	public void setEmailAddress(final String emailAddress) {
+	public String getDestination() {
+		return this.destination;
+	}
 
-		this.emailAddress = emailAddress;
+	public QuickNoteDE getNote() {
+		return this.note;
+	}
+
+	public void setCustomer(final QuickCustomerDE quickCustomerDE) {
+
+		this.customer = quickCustomerDE;
+	}
+
+	public void setDestination(final String destination) {
+
+		this.destination = destination;
+	}
+
+	public void setNote(final QuickNoteDE quickNoteDE) {
+
+		this.note = quickNoteDE;
 	}
 }
