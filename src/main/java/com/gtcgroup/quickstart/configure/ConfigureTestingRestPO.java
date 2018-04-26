@@ -23,25 +23,29 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.populator;
+package com.gtcgroup.quickstart.configure;
+
+import org.glassfish.jersey.server.ResourceConfig;
+
+import com.gtcgroup.justify.rest.testing.extension.JstConfigureTestingRestPO;
+import com.gtcgroup.quickstart.ic.QuickStartRestIC;
 
 /**
+ * This Parameter Object class supports configuration.
+ *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
  * <a href="http://gtcGroup.com">gtcGroup.com </a>.
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since 8.5
  */
-public enum ConstantsQuickStart {
+public class ConfigureTestingRestPO extends JstConfigureTestingRestPO {
 
-	INSTANCE;
+	@Override
+	protected ResourceConfig instantiateResourceConfigTM() {
 
-	public static final String JUSTIFY_PU = "quickstart-pu";
-
-	public static final String QUICKSTART_NOTE_UUID = "quickStartUUID";
-
-	public static final String QUICKSTART_NOTE_TEXT = "Test Text One";
-
+		return new ResourceConfig(QuickStartRestIC.class);
+	}
 }

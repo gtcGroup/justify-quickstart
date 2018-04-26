@@ -23,7 +23,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.demo.quickstart.assertions;
+package com.gtcgroup.quickstart.demo.assertions;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -36,11 +36,11 @@ import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
 import com.gtcgroup.justify.jpa.testing.assertion.AssertionsJPA;
 import com.gtcgroup.justify.jpa.testing.assertion.JstAssertCascadePO;
 import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
-import com.gtcgroup.justify.quickstart.de.QuickCustomerDE;
-import com.gtcgroup.justify.quickstart.de.QuickNoteDE;
-import com.gtcgroup.justify.quickstart.de.QuickVacationDE;
-import com.gtcgroup.justify.quickstart.populator.ConfigureTestingJpaPO;
-import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
+import com.gtcgroup.quickstart.de.QuickCustomerDE;
+import com.gtcgroup.quickstart.de.QuickNoteDE;
+import com.gtcgroup.quickstart.de.QuickVacationDE;
+import com.gtcgroup.quickstart.populator.ConfigureTestingJpaPO;
+import com.gtcgroup.quickstart.populator.ConstantsQuickStart;
 
 /**
  * This demonstration class verifies the {@link QuickVacationDE} cascade values

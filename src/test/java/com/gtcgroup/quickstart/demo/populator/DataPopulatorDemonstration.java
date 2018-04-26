@@ -24,21 +24,21 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.gtcgroup.justify.quickstart.bf;
+package com.gtcgroup.quickstart.demo.populator;
 
-import java.util.List;
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.gtcgroup.justify.core.po.JstExceptionPO;
-import com.gtcgroup.justify.jpa.po.JstFindSinglePO;
-import com.gtcgroup.justify.jpa.po.JstQueryAllJPO;
-import com.gtcgroup.justify.jpa.rm.JstQueryFindRM;
-import com.gtcgroup.justify.quickstart.de.QuickNoteDE;
-import com.gtcgroup.justify.quickstart.exception.QuickStartException;
-import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
+import org.junit.jupiter.api.Test;
+
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
+import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
+import com.gtcgroup.quickstart.populator.ConfigureTestingJpaPO;
 
 /**
- * An Business Facade used for demonstration.
+ * This demonstration class simply persists data in the in-memory database. Read
+ * through the console log to see how quickly a database can be launched, tables
+ * created, and data inserted. The performance for this approach is surprisingly
+ * scalable.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -46,35 +46,15 @@ import com.gtcgroup.justify.quickstart.populator.ConstantsQuickStart;
  * </p>
  *
  * @author Marvin Toll
- * @since 8.5
+ * @since v3.0
  */
-public enum QuickBF {
+@JstConfigureTestLogToConsole
+@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
+public class DataPopulatorDemonstration {
 
-	INSTANCE;
+	@Test
+	public void testConfigureJPA() {
 
-	public static QuickNoteDE getNote(final String uuid) {
-
-		final Optional<QuickNoteDE> optionalNote = JstQueryFindRM
-				.findSingle(JstFindSinglePO.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU)
-						.withEntityClass(QuickNoteDE.class).withEntityIdentity(uuid));
-
-		if (optionalNote.isPresent()) {
-			return optionalNote.get();
-		}
-
-		throw new QuickStartException(JstExceptionPO.withMessage("The UUID [" + "] could not be found."));
+		assertTrue(true);
 	}
-
-	public static List<QuickNoteDE> getNoteList() {
-
-		final Optional<List<QuickNoteDE>> optionalList = JstQueryFindRM.queryAll(JstQueryAllJPO
-				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withEntityClass(QuickNoteDE.class));
-
-		if (optionalList.isPresent()) {
-			return optionalList.get();
-		}
-
-		throw new QuickStartException(JstExceptionPO.withMessage("A note list could not be found."));
-	}
-
 }

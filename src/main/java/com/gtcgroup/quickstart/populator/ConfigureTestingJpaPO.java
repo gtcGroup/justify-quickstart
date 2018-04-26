@@ -23,67 +23,37 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.populator;
+package com.gtcgroup.quickstart.populator;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJpaPO;
 import com.gtcgroup.justify.jpa.testing.populator.JstBaseDataPopulator;
-import com.gtcgroup.justify.quickstart.de.QuickCustomerDE;
-import com.gtcgroup.justify.quickstart.de.QuickNoteDE;
-import com.gtcgroup.justify.quickstart.de.QuickVacationDE;
 
 /**
- * Test Class
- *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
  * <a href="http://gtcGroup.com">gtcGroup.com </a>.
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since 8.5
  */
-public class QuickStartTestingDataPopulator extends JstBaseDataPopulator {
+public class ConfigureTestingJpaPO extends JstConfigureTestingJpaPO {
 
-	private static QuickNoteDE note;
-
-	public static QuickNoteDE getNotePopulated() {
-
-		if (null == note) {
-			final QuickNoteDE quickNoteDE = new QuickNoteDE();
-			quickNoteDE.setUuid(ConstantsQuickStart.QUICKSTART_NOTE_UUID);
-			quickNoteDE.setText(ConstantsQuickStart.QUICKSTART_NOTE_TEXT);
-			QuickStartTestingDataPopulator.note = quickNoteDE;
-		}
-		return note;
-	}
-
-	private static QuickVacationDE populateVacation() {
-
-		final QuickCustomerDE quickCustomerDE = new QuickCustomerDE();
-
-		final QuickVacationDE quickVacationDE = new QuickVacationDE();
-		quickVacationDE.setNote(getNotePopulated());
-		quickVacationDE.setCustomer(quickCustomerDE);
-
-		return quickVacationDE;
-	}
-
-	private final List<Object> populatedList = new ArrayList<>();
-
-	public List<Object> getPopulatedList() {
-		return this.populatedList;
-	}
-
-	/**
-	 * @see JstBaseDataPopulator#populateCreateListTM(JstQueryJpaRM)
-	 */
 	@Override
-	public List<Object> populateCreateListTM(final String persistenceUnitName) {
+	protected String definePersistenceUnitNameTM() {
+		return ConstantsQuickStart.JUSTIFY_PU;
+	}
 
-		this.populatedList.add(populateVacation());
+	@Override
+	protected void populateCreateListTM(final List<Class<? extends JstBaseDataPopulator>> dataPopulatorList) {
+		dataPopulatorList.add(QuickStartTestingDataPopulator.class);
+	}
 
-		return this.populatedList;
+	@Override
+	protected void populateEntityManagerFactoryPropertiesTM(final Map<String, Object> entityManagerFactoryPropertyMap) {
+		// Empty Block
 	}
 }

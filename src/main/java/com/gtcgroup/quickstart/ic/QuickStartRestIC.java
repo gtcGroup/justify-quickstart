@@ -24,21 +24,24 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.gtcgroup.demo.quickstart.populator;
+package com.gtcgroup.quickstart.ic;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
-import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
-import com.gtcgroup.justify.quickstart.populator.ConfigureTestingJpaPO;
+import com.gtcgroup.justify.core.base.JstBaseIC;
+import com.gtcgroup.quickstart.bf.QuickStartBF;
+import com.gtcgroup.quickstart.de.QuickNoteDE;
+import com.gtcgroup.quickstart.to.NoteTO;
 
 /**
- * This demonstration class simply persists data in the in-memory database. Read
- * through the console log to see how quickly a database can be launched, tables
- * created, and data inserted. The performance for this approach is surprisingly
- * scalable.
+ * An I/O Controller class used for demonstration.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -46,15 +49,29 @@ import com.gtcgroup.justify.quickstart.populator.ConfigureTestingJpaPO;
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since 8.5
  */
-@JstConfigureTestLogToConsole
-@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
-public class DataPopulatorDemonstration {
+@Path("/entity")
+public class QuickStartRestIC extends JstBaseIC {
 
-	@Test
-	public void testConfigureJPA() {
+	@GET
+	public Response getList() {
 
-		assertTrue(true);
+		final GenericEntity<List<QuickNoteDE>> genericEntity = new GenericEntity<List<QuickNoteDE>>(
+				QuickStartBF.retrieveNoteList()) {
+			// Empty Block
+		};
+
+		return Response.ok(genericEntity).type(MediaType.APPLICATION_JSON).build();
+	}
+
+	@GET
+	@Path("/{uuid}")
+	public Response getSingle(@PathParam("uuid") final String uuid) {
+
+		final NoteTO note = new NoteTO();
+		note.setText(QuickStartBF.retrieveNote(uuid).getText());
+
+		return Response.ok(note).type(MediaType.APPLICATION_JSON).build();
 	}
 }

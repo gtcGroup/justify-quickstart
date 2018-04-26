@@ -23,36 +23,46 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.de;
+package com.gtcgroup.quickstart.exception;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.gtcgroup.justify.core.base.JstBaseRuntimeException;
+import com.gtcgroup.justify.core.helper.internal.SystemOutLoggingUtilHelper;
+import com.gtcgroup.justify.core.po.JstExceptionPO;
 
-import com.gtcgroup.justify.jpa.de.BaseUuidDE;
-
-@Entity
-@Table(name = "CUSTOMER")
-@AttributeOverride(name = "uuid", column = @Column(name = "CUSTOMER_UUID"))
-public class QuickCustomerDE extends BaseUuidDE {
+/**
+ * This {@link RuntimeException} logs using {@link System}.out.
+ *
+ * <p style="font-family:Verdana; font-size:10px; font-style:italic">
+ * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
+ * <a href="http://gtcGroup.com">gtcGroup.com </a>.
+ * </p>
+ *
+ * @author Marvin Toll
+ * @since v.6.0
+ */
+public class QuickStartException extends JstBaseRuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "CUSTOMER_EMAIL_ADDRESS")
-	private String emailAddress;
+	/**
+	 * Constructor
+	 */
+	public QuickStartException(final JstExceptionPO exceptionPO) {
+
+		super(exceptionPO);
+	}
+
+	/**
+	 * Constructor
+	 */
+	public QuickStartException(final JstExceptionPO exceptionPO, final Throwable exception) {
+
+		super(exceptionPO, exception);
+	}
 
 	@Override
-	public boolean equals(final Object obj) {
-		return super.equals(obj);
-	}
+	protected void logExceptionTM(final JstExceptionPO exceptionPO) {
+		SystemOutLoggingUtilHelper.logException(exceptionPO);
 
-	public String getEmailAddress() {
-		return this.emailAddress;
-	}
-
-	public void setEmailAddress(final String emailAddress) {
-
-		this.emailAddress = emailAddress;
 	}
 }

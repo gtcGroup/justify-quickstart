@@ -24,24 +24,21 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.gtcgroup.justify.quickstart.ic;
+package com.gtcgroup.quickstart.bf;
 
 import java.util.List;
+import java.util.Optional;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import com.gtcgroup.justify.core.base.JstBaseIC;
-import com.gtcgroup.justify.quickstart.bf.QuickBF;
-import com.gtcgroup.justify.quickstart.de.QuickNoteDE;
-import com.gtcgroup.justify.quickstart.to.NoteTO;
+import com.gtcgroup.justify.core.po.JstExceptionPO;
+import com.gtcgroup.justify.jpa.po.JstFindSinglePO;
+import com.gtcgroup.justify.jpa.po.JstQueryAllJPO;
+import com.gtcgroup.justify.jpa.rm.JstQueryFindRM;
+import com.gtcgroup.quickstart.de.QuickNoteDE;
+import com.gtcgroup.quickstart.exception.QuickStartException;
+import com.gtcgroup.quickstart.populator.ConstantsQuickStart;
 
 /**
- * An I/O Controller class used for demonstration.
+ * An Business Facade used for demonstration.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -51,27 +48,33 @@ import com.gtcgroup.justify.quickstart.to.NoteTO;
  * @author Marvin Toll
  * @since 8.5
  */
-@Path("/entity")
-public class QuickStartRestIC extends JstBaseIC {
+public enum QuickStartBF {
 
-	@GET
-	public Response getList() {
+	INSTANCE;
 
-		final GenericEntity<List<QuickNoteDE>> genericEntity = new GenericEntity<List<QuickNoteDE>>(
-				QuickBF.getNoteList()) {
-			// Empty Block
-		};
+	public static QuickNoteDE retrieveNote(final String uuid) {
 
-		return Response.ok(genericEntity).type(MediaType.APPLICATION_JSON).build();
+		final Optional<QuickNoteDE> optionalNote = JstQueryFindRM
+				.findSingle(JstFindSinglePO.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU)
+						.withEntityClass(QuickNoteDE.class).withEntityIdentity(uuid));
+
+		if (optionalNote.isPresent()) {
+			return optionalNote.get();
+		}
+
+		throw new QuickStartException(JstExceptionPO.withMessage("The UUID [" + "] could not be found."));
 	}
 
-	@GET
-	@Path("/{uuid}")
-	public Response getSingle(@PathParam("uuid") final String uuid) {
+	public static List<QuickNoteDE> retrieveNoteList() {
 
-		final NoteTO note = new NoteTO();
-		note.setText(QuickBF.getNote(uuid).getText());
+		final Optional<List<QuickNoteDE>> optionalList = JstQueryFindRM.queryAll(JstQueryAllJPO
+				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withEntityClass(QuickNoteDE.class));
 
-		return Response.ok(note).type(MediaType.APPLICATION_JSON).build();
+		if (optionalList.isPresent()) {
+			return optionalList.get();
+		}
+
+		throw new QuickStartException(JstExceptionPO.withMessage("A note list could not be found."));
 	}
+
 }

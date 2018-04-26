@@ -23,29 +23,45 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.configure;
+package com.gtcgroup.quickstart.de;
 
-import org.glassfish.jersey.server.ResourceConfig;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-import com.gtcgroup.justify.quickstart.ic.QuickStartRestIC;
-import com.gtcgroup.justify.rest.testing.extension.JstConfigureTestingRestPO;
+import com.gtcgroup.justify.jpa.de.BaseUuidDE;
 
-/**
- * This Parameter Object class supports configuration.
- *
- * <p style="font-family:Verdana; font-size:10px; font-style:italic">
- * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
- * <a href="http://gtcGroup.com">gtcGroup.com </a>.
- * </p>
- *
- * @author Marvin Toll
- * @since 8.5
- */
-public class ConfigureTestingRestPO extends JstConfigureTestingRestPO {
+@Entity
+@Table(name = "NOTE")
+@AttributeOverride(name = "uuid", column = @Column(name = "NOTE_UUID"))
+@NamedQuery(name = "queryNoteList", query = "SELECT note FROM QuickNoteDE note")
+public class QuickNoteDE extends BaseUuidDE {
+
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "NOTE_TEXT")
+	private String text;
 
 	@Override
-	protected ResourceConfig instantiateResourceConfigTM() {
+	public boolean equals(final Object obj) {
+		return super.equals(obj);
+	}
 
-		return new ResourceConfig(QuickStartRestIC.class);
+	public String getText() {
+
+		return this.text;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	public QuickNoteDE setText(final String text) {
+
+		this.text = text;
+		return this;
 	}
 }

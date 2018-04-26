@@ -23,39 +23,72 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.justify.quickstart.de;
+package com.gtcgroup.quickstart.de;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.gtcgroup.justify.jpa.de.BaseUuidDE;
 
 @Entity
-@Table(name = "NOTE")
-@AttributeOverride(name = "uuid", column = @Column(name = "NOTE_UUID"))
-@NamedQuery(name = "queryNoteList", query = "SELECT note FROM QuickNoteDE note")
-public class QuickNoteDE extends BaseUuidDE {
+@Table(name = "VACATION")
+@AttributeOverride(name = "uuid", column = @Column(name = "VACATION_UUID"))
+public class QuickVacationDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "NOTE_TEXT")
-	private String text;
+	@Column(name = "VACATION_DESTINATION")
+	private String destination;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "NOTE_UUID", referencedColumnName = "NOTE_UUID")
+	private QuickNoteDE note;
+
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+	@JoinColumn(name = "CUSTOMER_UUID", referencedColumnName = "CUSTOMER_UUID")
+	private QuickCustomerDE customer;
 
 	@Override
 	public boolean equals(final Object obj) {
 		return super.equals(obj);
 	}
 
-	public String getText() {
+	public QuickCustomerDE getCustomer() {
 
-		return this.text;
+		return this.customer;
 	}
 
-	public void setText(final String text) {
+	public String getDestination() {
+		return this.destination;
+	}
 
-		this.text = text;
+	public QuickNoteDE getNote() {
+		return this.note;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	public void setCustomer(final QuickCustomerDE quickCustomerDE) {
+
+		this.customer = quickCustomerDE;
+	}
+
+	public QuickVacationDE setDestination(final String destination) {
+
+		this.destination = destination;
+		return this;
+	}
+
+	public void setNote(final QuickNoteDE quickNoteDE) {
+
+		this.note = quickNoteDE;
 	}
 }

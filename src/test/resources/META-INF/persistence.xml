@@ -11,9 +11,9 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 
 		<!-- DOMAIN ENTITIES -->
 
-		<class>com.gtcgroup.justify.quickstart.de.QuickVacationDE</class>
-		<class>com.gtcgroup.justify.quickstart.de.QuickCustomerDE</class>
-		<class>com.gtcgroup.justify.quickstart.de.QuickNoteDE</class>
+		<class>com.gtcgroup.quickstart.de.QuickVacationDE</class>
+		<class>com.gtcgroup.quickstart.de.QuickCustomerDE</class>
+		<class>com.gtcgroup.quickstart.de.QuickNoteDE</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
