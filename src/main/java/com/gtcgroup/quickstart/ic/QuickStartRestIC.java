@@ -55,7 +55,17 @@ import com.gtcgroup.quickstart.to.NoteTO;
 public class QuickStartRestIC extends JstBaseIC {
 
 	@GET
-	public Response getList() {
+	@Path("/{uuid}")
+	public Response getNote(@PathParam("uuid") final String uuid) {
+
+		final NoteTO note = new NoteTO();
+		note.setText(QuickStartBF.retrieveNote(uuid).getText());
+
+		return Response.ok(note).type(MediaType.APPLICATION_JSON).build();
+	}
+
+	@GET
+	public Response getNoteList() {
 
 		final GenericEntity<List<QuickNoteDE>> genericEntity = new GenericEntity<List<QuickNoteDE>>(
 				QuickStartBF.retrieveNoteList()) {
@@ -63,15 +73,5 @@ public class QuickStartRestIC extends JstBaseIC {
 		};
 
 		return Response.ok(genericEntity).type(MediaType.APPLICATION_JSON).build();
-	}
-
-	@GET
-	@Path("/{uuid}")
-	public Response getSingle(@PathParam("uuid") final String uuid) {
-
-		final NoteTO note = new NoteTO();
-		note.setText(QuickStartBF.retrieveNote(uuid).getText());
-
-		return Response.ok(note).type(MediaType.APPLICATION_JSON).build();
 	}
 }

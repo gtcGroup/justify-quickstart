@@ -29,13 +29,12 @@ package com.gtcgroup.quickstart.bf;
 import java.util.List;
 import java.util.Optional;
 
-import com.gtcgroup.justify.core.po.JstExceptionPO;
 import com.gtcgroup.justify.jpa.po.JstFindSinglePO;
 import com.gtcgroup.justify.jpa.po.JstQueryAllJPO;
 import com.gtcgroup.justify.jpa.rm.JstQueryFindRM;
+import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
 import com.gtcgroup.quickstart.de.QuickNoteDE;
-import com.gtcgroup.quickstart.exception.QuickStartException;
-import com.gtcgroup.quickstart.populator.ConstantsQuickStart;
+import com.gtcgroup.quickstart.helper.QuickStartUtilHelper;
 
 /**
  * An Business Facade used for demonstration.
@@ -58,11 +57,7 @@ public enum QuickStartBF {
 				.findSingle(JstFindSinglePO.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU)
 						.withEntityClass(QuickNoteDE.class).withEntityIdentity(uuid));
 
-		if (optionalNote.isPresent()) {
-			return optionalNote.get();
-		}
-
-		throw new QuickStartException(JstExceptionPO.withMessage("The UUID [" + "] could not be found."));
+		return QuickStartUtilHelper.unpackOptional(optionalNote, "The UUID [" + uuid + "] could not be found.");
 	}
 
 	public static List<QuickNoteDE> retrieveNoteList() {
@@ -70,11 +65,7 @@ public enum QuickStartBF {
 		final Optional<List<QuickNoteDE>> optionalList = JstQueryFindRM.queryAll(JstQueryAllJPO
 				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withEntityClass(QuickNoteDE.class));
 
-		if (optionalList.isPresent()) {
-			return optionalList.get();
-		}
+		return QuickStartUtilHelper.unpackOptional(optionalList, "A note list could not be found.");
 
-		throw new QuickStartException(JstExceptionPO.withMessage("A note list could not be found."));
 	}
-
 }

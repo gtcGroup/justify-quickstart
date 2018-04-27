@@ -23,7 +23,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.quickstart.populator;
+package com.gtcgroup.quickstart.constants;
 
 /**
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">

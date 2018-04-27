@@ -24,21 +24,15 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.gtcgroup.quickstart.demo.populator;
+package com.gtcgroup.quickstart.helper;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Optional;
 
-import org.junit.jupiter.api.Test;
-
-import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
-import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
-import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
+import com.gtcgroup.justify.core.po.JstExceptionPO;
+import com.gtcgroup.quickstart.exception.QuickStartException;
 
 /**
- * This demonstration class simply persists data in the in-memory database. Read
- * through the console log to see how quickly a database can be launched, tables
- * created, and data inserted. The performance for this approach is surprisingly
- * scalable.
+ * An Util Helper used for demonstration.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -46,15 +40,18 @@ import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since 8.5
  */
-@JstConfigureTestLogToConsole
-@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
-public class DataPopulatorDemonstration {
+public enum QuickStartUtilHelper {
 
-	@Test
-	public void testConfigureJPA() {
+	INSTANCE;
 
-		assertTrue(true);
+	public static <OBJECT> OBJECT unpackOptional(final Optional<OBJECT> optional, final String exceptionMessage) {
+
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+
+		throw new QuickStartException(JstExceptionPO.withMessage(exceptionMessage));
 	}
 }

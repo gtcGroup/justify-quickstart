@@ -1,5 +1,5 @@
 # justify-quickstart
-PED Central is the home for the open-source “Justify” suite of software engineering modules.
+PED Central is the home for the open-source ï¿½Justifyï¿½ suite of software engineering modules.
 Justify seeks API alignment between Java 1.8+ application code and JUnit 5 test code.
 
 <a href="http://pedcentral.com/justify/" target="_blank">
@@ -8,7 +8,7 @@ Justify seeks API alignment between Java 1.8+ application code and JUnit 5 test 
 
 ### <a name="changes"></a>Release Notes
 
-#### Version 8.5.0-alpha4 <span class="date">2018-04-19</span>
+#### Version 8.5.0-alpha4 <span class="date">2018-04-27</span>
 
 *   04 [Convert to JUnit5 from JUnit4](https://github.com/gtcGroup/justify-quickstart/issues/4)
 

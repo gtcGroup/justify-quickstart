@@ -25,22 +25,25 @@
  */
 package com.gtcgroup.quickstart.demo.assertions;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
-import com.gtcgroup.justify.core.testing.extension.JstConfigureTestUserId;
-import com.gtcgroup.justify.jpa.testing.assertion.AssertionsJPA;
 import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
-import com.gtcgroup.quickstart.de.QuickNoteDE;
-import com.gtcgroup.quickstart.populator.ConfigureTestingJpaPO;
-import com.gtcgroup.quickstart.populator.ConstantsQuickStart;
-import com.gtcgroup.quickstart.populator.QuickStartTestingDataPopulator;
+import com.gtcgroup.justify.rest.testing.assertion.AssertionsREST;
+import com.gtcgroup.justify.rest.testing.assertion.JstAssertRestPO;
+import com.gtcgroup.justify.rest.testing.extension.JstConfigureTestingREST;
+import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
+import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
+import com.gtcgroup.quickstart.po.ConfigureTestingRestPO;
+import com.gtcgroup.quickstart.to.NoteTO;
+import com.sun.research.ws.wadl.HTTPMethods;
 
 /**
- * This class demonstrates JPA convenience assertions using the
- * {@link AssertionsJPA} enum.
+ * This class demonstrates REST convenience assertions using the
+ * {@link AssertionsREST} enum. Note: JPA configuration must occur prior to REST
+ * configuration.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -51,30 +54,34 @@ import com.gtcgroup.quickstart.populator.QuickStartTestingDataPopulator;
  * @since v3.0
  */
 @JstConfigureTestLogToConsole
-@JstConfigureTestUserId(userId = "assertionsId")
 @JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
-public class JpaAssertionsDemonstration {
+@JstConfigureTestingREST(configureTestRestPO = ConfigureTestingRestPO.class)
+public class AssertionsRestDemonstration {
 
 	@Test
-	public void testExistsInDatabase_happyPath() {
+	public void testList_happyPath_default_200() {
 
-		assertAll(() -> {
-			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU,
-					QuickStartTestingDataPopulator.getNotePopulated());
-			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, QuickNoteDE.class,
-					ConstantsQuickStart.QUICKSTART_NOTE_UUID);
-		});
+		AssertionsREST.assertList(JstAssertRestPO.withHttpMethod(HTTPMethods.GET.toString()).withPath("entity")
+				.withRequestLogging().withResponseLogging());
+
 	}
 
 	@Test
-	public void testNotExistsInDatabase_happyPath() {
+	public void testSingle_404_FAKE_PATH() {
 
-		final QuickNoteDE note = new QuickNoteDE();
-		note.setUuid("fake_UUID");
+		AssertionsREST.assertSingle(NoteTO.class, JstAssertRestPO.withHttpMethod(HTTPMethods.GET.toString())
+				.withPath("FAKE_PATH").withRequestLogging().withResponseLogging().withValidHttpStatusCodes(404));
+	}
 
-		assertAll(() -> {
-			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, note);
-			AssertionsJPA.assertNotExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, QuickNoteDE.class, "fake_IDENTITY");
-		});
+	@Test
+	public void testSingle_happyPath_default_200() {
+
+		final NoteTO note = AssertionsREST.assertSingle(NoteTO.class,
+				JstAssertRestPO.withHttpMethod(HTTPMethods.GET.toString())
+						.withPath("entity/" + ConstantsQuickStart.QUICKSTART_NOTE_UUID).withRequestLogging()
+						.withResponseLogging());
+
+		assertEquals(ConstantsQuickStart.QUICKSTART_NOTE_TEXT, note.getText());
+
 	}
 }

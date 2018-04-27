@@ -36,11 +36,11 @@ import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
 import com.gtcgroup.justify.jpa.testing.assertion.AssertionsJPA;
 import com.gtcgroup.justify.jpa.testing.assertion.JstAssertCascadePO;
 import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
+import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
 import com.gtcgroup.quickstart.de.QuickCustomerDE;
 import com.gtcgroup.quickstart.de.QuickNoteDE;
 import com.gtcgroup.quickstart.de.QuickVacationDE;
-import com.gtcgroup.quickstart.populator.ConfigureTestingJpaPO;
-import com.gtcgroup.quickstart.populator.ConstantsQuickStart;
+import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
 
 /**
  * This demonstration class verifies the {@link QuickVacationDE} cascade values

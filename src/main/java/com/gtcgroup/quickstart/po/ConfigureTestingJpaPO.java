@@ -23,16 +23,17 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.quickstart.configure;
+package com.gtcgroup.quickstart.po;
 
-import org.glassfish.jersey.server.ResourceConfig;
+import java.util.List;
+import java.util.Map;
 
-import com.gtcgroup.justify.rest.testing.extension.JstConfigureTestingRestPO;
-import com.gtcgroup.quickstart.ic.QuickStartRestIC;
+import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJpaPO;
+import com.gtcgroup.justify.jpa.testing.populator.JstBaseDataPopulator;
+import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
+import com.gtcgroup.quickstart.populator.QuickStartTestingDataPopulator;
 
 /**
- * This Parameter Object class supports configuration.
- *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
  * <a href="http://gtcGroup.com">gtcGroup.com </a>.
@@ -41,11 +42,20 @@ import com.gtcgroup.quickstart.ic.QuickStartRestIC;
  * @author Marvin Toll
  * @since 8.5
  */
-public class ConfigureTestingRestPO extends JstConfigureTestingRestPO {
+public class ConfigureTestingJpaPO extends JstConfigureTestingJpaPO {
 
 	@Override
-	protected ResourceConfig instantiateResourceConfigTM() {
+	public String definePersistenceUnitNameTM() {
+		return ConstantsQuickStart.JUSTIFY_PU;
+	}
 
-		return new ResourceConfig(QuickStartRestIC.class);
+	@Override
+	public void populateCreateListTM(final List<Class<? extends JstBaseDataPopulator>> dataPopulatorList) {
+		dataPopulatorList.add(QuickStartTestingDataPopulator.class);
+	}
+
+	@Override
+	public void populateEntityManagerFactoryPropertiesTM(final Map<String, Object> entityManagerFactoryPropertyMap) {
+		// Empty Block
 	}
 }
