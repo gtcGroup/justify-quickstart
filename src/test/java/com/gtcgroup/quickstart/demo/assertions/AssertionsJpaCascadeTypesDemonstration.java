@@ -55,7 +55,7 @@ import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
  */
 @JstConfigureTestLogToConsole
 @JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
-public class JpaCascadeTypesDemonstration {
+public class AssertionsJpaCascadeTypesDemonstration {
 
 	private static final String GET_NOTE = "getNote";
 	private static final String GET_CUSTOMER = "getCustomer";
