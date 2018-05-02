@@ -29,9 +29,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJpaPO;
-import com.gtcgroup.justify.jpa.testing.populator.JstBaseDataPopulator;
+import com.gtcgroup.justify.jpa.testing.populator.JstBaseTestingPopulator;
 import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
-import com.gtcgroup.quickstart.populator.QuickStartTestingDataPopulator;
+import com.gtcgroup.quickstart.populator.QuickStartTestingPopulator;
 
 /**
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
@@ -50,8 +50,8 @@ public class ConfigureTestingJpaPO extends JstConfigureTestingJpaPO {
 	}
 
 	@Override
-	public void populateCreateListTM(final List<Class<? extends JstBaseDataPopulator>> dataPopulatorList) {
-		dataPopulatorList.add(QuickStartTestingDataPopulator.class);
+	public void populateCreateListTM(final List<Class<? extends JstBaseTestingPopulator>> testingPopulatorList) {
+		testingPopulatorList.add(QuickStartTestingPopulator.class);
 	}
 
 	@Override

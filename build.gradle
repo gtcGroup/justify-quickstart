@@ -58,8 +58,8 @@ dependencies {
     //compile project(':justify-jpa')
     //compile project(':justify-rest')
 	
-	compile 'com.gtcgroup:justify-jpa:8.5.0-alpha4'
-	compile 'com.gtcgroup:justify-rest:8.5.0-alpha4'
+	compile 'com.gtcgroup:justify-jpa:8.5.0-alpha5'
+	compile 'com.gtcgroup:justify-rest:8.5.0-alpha5'
 	
 }
 

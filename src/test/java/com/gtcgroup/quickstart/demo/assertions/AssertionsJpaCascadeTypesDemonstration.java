@@ -32,7 +32,7 @@ import javax.persistence.OneToOne;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
-import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestingLogToConsole;
 import com.gtcgroup.justify.jpa.testing.assertion.AssertionsJPA;
 import com.gtcgroup.justify.jpa.testing.assertion.JstAssertCascadePO;
 import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
@@ -53,8 +53,8 @@ import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
  *
  * @author Marvin Toll
  */
-@JstConfigureTestLogToConsole
-@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
+@JstConfigureTestingLogToConsole
+@JstConfigureTestingJPA(configureTestingJpaPO = ConfigureTestingJpaPO.class)
 public class AssertionsJpaCascadeTypesDemonstration {
 
 	private static final String GET_NOTE = "getNote";

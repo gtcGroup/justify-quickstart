@@ -38,7 +38,7 @@ import javax.ws.rs.core.Response;
 import com.gtcgroup.justify.core.base.JstBaseIC;
 import com.gtcgroup.quickstart.bf.QuickStartBF;
 import com.gtcgroup.quickstart.de.QuickNoteDE;
-import com.gtcgroup.quickstart.to.NoteTO;
+import com.gtcgroup.quickstart.to.NoteResponseTO;
 
 /**
  * An I/O Controller class used for demonstration.
@@ -58,7 +58,7 @@ public class QuickStartRestIC extends JstBaseIC {
 	@Path("/{uuid}")
 	public Response getNote(@PathParam("uuid") final String uuid) {
 
-		final NoteTO note = new NoteTO();
+		final NoteResponseTO note = new NoteResponseTO();
 		note.setText(QuickStartBF.retrieveNote(uuid).getText());
 
 		return Response.ok(note).type(MediaType.APPLICATION_JSON).build();

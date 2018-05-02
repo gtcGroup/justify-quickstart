@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestingLogToConsole;
 import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
 import com.gtcgroup.justify.rest.testing.assertion.AssertionsREST;
 import com.gtcgroup.justify.rest.testing.assertion.JstAssertRestPO;
@@ -37,7 +37,7 @@ import com.gtcgroup.justify.rest.testing.extension.JstConfigureTestingREST;
 import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
 import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
 import com.gtcgroup.quickstart.po.ConfigureTestingRestPO;
-import com.gtcgroup.quickstart.to.NoteTO;
+import com.gtcgroup.quickstart.to.NoteResponseTO;
 import com.sun.research.ws.wadl.HTTPMethods;
 
 /**
@@ -53,9 +53,9 @@ import com.sun.research.ws.wadl.HTTPMethods;
  * @author Marvin Toll
  * @since v3.0
  */
-@JstConfigureTestLogToConsole
-@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
-@JstConfigureTestingREST(configureTestRestPO = ConfigureTestingRestPO.class)
+@JstConfigureTestingLogToConsole
+@JstConfigureTestingJPA(configureTestingJpaPO = ConfigureTestingJpaPO.class)
+@JstConfigureTestingREST(configureTestingRestPO = ConfigureTestingRestPO.class)
 public class AssertionsRestDemonstration {
 
 	@Test
@@ -69,14 +69,14 @@ public class AssertionsRestDemonstration {
 	@Test
 	public void testSingle_404_FAKE_PATH() {
 
-		AssertionsREST.assertSingle(NoteTO.class, JstAssertRestPO.withHttpMethod(HTTPMethods.GET.toString())
+		AssertionsREST.assertSingle(NoteResponseTO.class, JstAssertRestPO.withHttpMethod(HTTPMethods.GET.toString())
 				.withPath("FAKE_PATH").withRequestLogging().withResponseLogging().withValidHttpStatusCodes(404));
 	}
 
 	@Test
 	public void testSingle_happyPath_default_200() {
 
-		final NoteTO note = AssertionsREST.assertSingle(NoteTO.class,
+		final NoteResponseTO note = AssertionsREST.assertSingle(NoteResponseTO.class,
 				JstAssertRestPO.withHttpMethod(HTTPMethods.GET.toString())
 						.withPath("entity/" + ConstantsQuickStart.QUICKSTART_NOTE_UUID).withRequestLogging()
 						.withResponseLogging());

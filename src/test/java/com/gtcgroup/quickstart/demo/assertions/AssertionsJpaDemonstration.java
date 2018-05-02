@@ -29,14 +29,14 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.Test;
 
-import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
-import com.gtcgroup.justify.core.testing.extension.JstConfigureTestUserId;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestingLogToConsole;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestingUserId;
 import com.gtcgroup.justify.jpa.testing.assertion.AssertionsJPA;
 import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
 import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
 import com.gtcgroup.quickstart.de.QuickNoteDE;
 import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
-import com.gtcgroup.quickstart.populator.QuickStartTestingDataPopulator;
+import com.gtcgroup.quickstart.populator.QuickStartTestingPopulator;
 
 /**
  * This class demonstrates JPA convenience assertions using the
@@ -50,9 +50,9 @@ import com.gtcgroup.quickstart.populator.QuickStartTestingDataPopulator;
  * @author Marvin Toll
  * @since v3.0
  */
-@JstConfigureTestLogToConsole
-@JstConfigureTestUserId(userId = "assertionsId")
-@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
+@JstConfigureTestingLogToConsole
+@JstConfigureTestingUserId(userId = "assertionsId")
+@JstConfigureTestingJPA(configureTestingJpaPO = ConfigureTestingJpaPO.class)
 public class AssertionsJpaDemonstration {
 
 	@Test
@@ -60,7 +60,7 @@ public class AssertionsJpaDemonstration {
 
 		assertAll(() -> {
 			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU,
-					QuickStartTestingDataPopulator.getNotePopulated());
+					QuickStartTestingPopulator.getNotePopulated());
 			AssertionsJPA.assertExistsInDatabase(ConstantsQuickStart.JUSTIFY_PU, QuickNoteDE.class,
 					ConstantsQuickStart.QUICKSTART_NOTE_UUID);
 		});

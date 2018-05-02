@@ -28,7 +28,7 @@ package com.gtcgroup.quickstart.populator;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gtcgroup.justify.jpa.testing.populator.JstBaseDataPopulator;
+import com.gtcgroup.justify.jpa.testing.populator.JstBaseTestingPopulator;
 import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
 import com.gtcgroup.quickstart.de.QuickCustomerDE;
 import com.gtcgroup.quickstart.de.QuickNoteDE;
@@ -45,7 +45,7 @@ import com.gtcgroup.quickstart.de.QuickVacationDE;
  * @author Marvin Toll
  * @since v3.0
  */
-public class QuickStartTestingDataPopulator extends JstBaseDataPopulator {
+public class QuickStartTestingPopulator extends JstBaseTestingPopulator {
 
 	private static QuickNoteDE note;
 
@@ -55,7 +55,7 @@ public class QuickStartTestingDataPopulator extends JstBaseDataPopulator {
 			final QuickNoteDE quickNoteDE = new QuickNoteDE();
 			quickNoteDE.setUuid(ConstantsQuickStart.QUICKSTART_NOTE_UUID);
 			quickNoteDE.setText(ConstantsQuickStart.QUICKSTART_NOTE_TEXT);
-			QuickStartTestingDataPopulator.note = quickNoteDE;
+			QuickStartTestingPopulator.note = quickNoteDE;
 		}
 		return note;
 	}
@@ -74,7 +74,7 @@ public class QuickStartTestingDataPopulator extends JstBaseDataPopulator {
 	private final List<Object> populatedList = new ArrayList<>();
 
 	/**
-	 * @see JstBaseDataPopulator#populateCreateListTM(JstQueryJpaRM)
+	 * @see JstBaseDataPopulator#populateCreateListTM(String)
 	 */
 	@Override
 	public List<Object> populateCreateListTM(final String persistenceUnitName) {

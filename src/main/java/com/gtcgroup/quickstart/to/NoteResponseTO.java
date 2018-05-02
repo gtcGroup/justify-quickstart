@@ -27,7 +27,7 @@ package com.gtcgroup.quickstart.to;
 
 import com.gtcgroup.justify.core.base.JstBaseTO;
 
-public class NoteTO extends JstBaseTO {
+public class NoteResponseTO extends JstBaseTO {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public class NoteTO extends JstBaseTO {
 		return this.text;
 	}
 
-	public NoteTO setText(final String text) {
+	public NoteResponseTO setText(final String text) {
 
 		this.text = text;
 		return this;

@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import com.gtcgroup.justify.core.testing.extension.JstConfigureTestLogToConsole;
+import com.gtcgroup.justify.core.testing.extension.JstConfigureTestingLogToConsole;
 import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJPA;
 import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
 
@@ -48,9 +48,9 @@ import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
  * @author Marvin Toll
  * @since v3.0
  */
-@JstConfigureTestLogToConsole
-@JstConfigureTestingJPA(configureTestJpaPO = ConfigureTestingJpaPO.class)
-public class DataPopulatorDemonstration {
+@JstConfigureTestingLogToConsole
+@JstConfigureTestingJPA(configureTestingJpaPO = ConfigureTestingJpaPO.class)
+public class TestingPopulatorDemonstration {
 
 	@Test
 	public void testConfigureJPA() {
