@@ -37,7 +37,7 @@ import com.gtcgroup.quickstart.de.QuickNoteDE;
 import com.gtcgroup.quickstart.helper.QuickStartUtilHelper;
 
 /**
- * An Business Facade used for demonstration.
+ * This Business Facade class demonstrates typical usage.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -54,7 +54,7 @@ public enum QuickStartBF {
 	public static QuickNoteDE retrieveNote(final String uuid) {
 
 		final Optional<QuickNoteDE> optionalNote = JstQueryFindRM
-				.findSingle(JstFindSinglePO.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU)
+				.findSingle(JstFindSinglePO.withPersistenceUnitName(ConstantsQuickStart.QUICKSTART_PU)
 						.withEntityClass(QuickNoteDE.class).withEntityIdentity(uuid));
 
 		return QuickStartUtilHelper.unpackOptional(optionalNote, "The UUID [" + uuid + "] could not be found.");
@@ -63,7 +63,7 @@ public enum QuickStartBF {
 	public static List<QuickNoteDE> retrieveNoteList() {
 
 		final Optional<List<QuickNoteDE>> optionalList = JstQueryFindRM.queryAll(JstQueryAllJPO
-				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withEntityClass(QuickNoteDE.class));
+				.withPersistenceUnitName(ConstantsQuickStart.QUICKSTART_PU).withEntityClass(QuickNoteDE.class));
 
 		return QuickStartUtilHelper.unpackOptional(optionalList, "A note list could not be found.");
 

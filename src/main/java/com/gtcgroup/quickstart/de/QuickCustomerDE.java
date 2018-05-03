@@ -32,6 +32,17 @@ import javax.persistence.Table;
 
 import com.gtcgroup.justify.jpa.de.BaseUuidDE;
 
+/**
+ * This Domain {@link Entity} class demonstrates typical usage.
+ *
+ * <p style="font-family:Verdana; font-size:10px; font-style:italic">
+ * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
+ * <a href="http://gtcGroup.com">gtcGroup.com </a>.
+ * </p>
+ *
+ * @author Marvin Toll
+ * @since 8.5
+ */
 @Entity
 @Table(name = "CUSTOMER")
 @AttributeOverride(name = "uuid", column = @Column(name = "CUSTOMER_UUID"))

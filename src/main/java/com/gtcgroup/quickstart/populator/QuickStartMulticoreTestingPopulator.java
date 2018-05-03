@@ -23,14 +23,18 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.quickstart.exception;
+package com.gtcgroup.quickstart.populator;
 
-import com.gtcgroup.justify.core.base.JstBaseRuntimeException;
-import com.gtcgroup.justify.core.helper.internal.SystemOutLoggingUtilHelper;
-import com.gtcgroup.justify.core.po.JstExceptionPO;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gtcgroup.justify.core.testing.helper.internal.LogTestConsoleUtilHelper;
+import com.gtcgroup.justify.jpa.testing.populator.JstBaseTestingPopulator;
+import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
+import com.gtcgroup.quickstart.de.QuickMulticoreDE;
 
 /**
- * This {@link RuntimeException} class demonstrates typical usage.
+ * This Testing Populator class demonstrates typical usage.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -40,29 +44,30 @@ import com.gtcgroup.justify.core.po.JstExceptionPO;
  * @author Marvin Toll
  * @since 8.5
  */
-public class QuickStartException extends JstBaseRuntimeException {
+public class QuickStartMulticoreTestingPopulator extends JstBaseTestingPopulator {
 
-	private static final long serialVersionUID = 1L;
+	private static QuickMulticoreDE populateNote(final int index) {
 
-	/**
-	 * Constructor
-	 */
-	public QuickStartException(final JstExceptionPO exceptionPO) {
-
-		super(exceptionPO);
+		return new QuickMulticoreDE().setMulticoreInt(index);
 	}
 
 	/**
-	 * Constructor
+	 * @see JstBaseDataPopulator#populateCreateListTM(String)
 	 */
-	public QuickStartException(final JstExceptionPO exceptionPO, final Throwable exception) {
-
-		super(exceptionPO, exception);
-	}
-
 	@Override
-	protected void logExceptionTM(final JstExceptionPO exceptionPO) {
-		SystemOutLoggingUtilHelper.logException(exceptionPO);
+	public List<Object> populateCreateListTM(final String persistenceUnitName) {
 
+		final List<Object> populatedList = new ArrayList<>();
+
+		for (int i = 0; i < 501; i++) {
+
+			populatedList.add(populateNote(i));
+		}
+
+		LogTestConsoleUtilHelper.logRedToConsole("[QuickStart]: " + populatedList.size() + " ["
+				+ QuickMulticoreDE.class.getSimpleName() + "] entities are created using the ["
+				+ ConstantsQuickStart.QUICKSTART_MULTICORE_PU + "] persistence unit with minimal logging.");
+
+		return populatedList;
 	}
 }

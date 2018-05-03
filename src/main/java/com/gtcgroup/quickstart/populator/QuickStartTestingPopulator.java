@@ -35,7 +35,7 @@ import com.gtcgroup.quickstart.de.QuickNoteDE;
 import com.gtcgroup.quickstart.de.QuickVacationDE;
 
 /**
- * Test Class
+ * This Testing Populator class demonstrates typical usage.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -43,7 +43,7 @@ import com.gtcgroup.quickstart.de.QuickVacationDE;
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since 8.5
  */
 public class QuickStartTestingPopulator extends JstBaseTestingPopulator {
 

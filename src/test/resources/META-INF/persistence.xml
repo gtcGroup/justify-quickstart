@@ -43,5 +43,34 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 		</properties>
 
 	</persistence-unit>
+	
+		<persistence-unit name="quickstart-multicore-pu" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+		<!-- DOMAIN ENTITIES -->
+
+		<class>com.gtcgroup.quickstart.de.QuickMulticoreDE</class>
+		
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+
+			<property name="eclipselink.weaving" value="static" />
+
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:justify-high-volume-persist" />
+			<property name="javax.persistence.jdbc.user" value="persist" />
+			<property name="javax.persistence.jdbc.password" value="persist" />
+			<property name="eclipselink.target-database"
+				value="org.eclipse.persistence.platform.database.H2Platform" />
+
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="both" />
+
+		</properties>
+
+	</persistence-unit>
 
 </persistence>

@@ -23,7 +23,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.quickstart.demo.assertions;
+package com.gtcgroup.quickstart.demo.jpa;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -52,6 +52,7 @@ import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
  * </p>
  *
  * @author Marvin Toll
+ * @since 8.5
  */
 @JstConfigureTestingLogToConsole
 @JstConfigureTestingJPA(configureTestingJpaPO = ConfigureTestingJpaPO.class)
@@ -76,7 +77,7 @@ public class AssertionsJpaCascadeTypesDemonstration {
 	public void testCascadeTypesForVacation_customerCascadeAll_incorrect() {
 
 		assertThrows(AssertionFailedError.class, () -> {
-			AssertionsJPA.assertCascadeTypes(JstAssertCascadePO.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU)
+			AssertionsJPA.assertCascadeTypes(JstAssertCascadePO.withPersistenceUnitName(ConstantsQuickStart.QUICKSTART_PU)
 					.withPopulatedEntity(populateVacation()).withCascadeAll(GET_NOTE, GET_CUSTOMER)
 					.withCleanupAfterVerification(GET_CUSTOMER));
 		});
@@ -86,7 +87,7 @@ public class AssertionsJpaCascadeTypesDemonstration {
 	public void testCascadeTypesForVacation_happyPath_usingConvenienceMethodForCascadeAll() {
 
 		final JstAssertCascadePO assertJpaPO = JstAssertCascadePO
-				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withPopulatedEntity(populateVacation())
+				.withPersistenceUnitName(ConstantsQuickStart.QUICKSTART_PU).withPopulatedEntity(populateVacation())
 				.withCascadeAll(GET_NOTE).withCascadeAllExceptRemove(GET_CUSTOMER)
 				.withCleanupAfterVerification(GET_CUSTOMER);
 
@@ -97,7 +98,7 @@ public class AssertionsJpaCascadeTypesDemonstration {
 	public void testCascadeTypesForVacation_happyPath_usingExplicitPersistAndRemoveMethods() {
 
 		final JstAssertCascadePO assertJpaPO = JstAssertCascadePO
-				.withPersistenceUnitName(ConstantsQuickStart.JUSTIFY_PU).withPopulatedEntity(populateVacation())
+				.withPersistenceUnitName(ConstantsQuickStart.QUICKSTART_PU).withPopulatedEntity(populateVacation())
 				.withCascadePersist(GET_NOTE).withCascadeRemove(GET_NOTE).withCascadeAllExceptRemove(GET_CUSTOMER)
 				.withCleanupAfterVerification(GET_CUSTOMER);
 

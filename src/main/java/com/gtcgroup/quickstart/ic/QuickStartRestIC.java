@@ -41,7 +41,7 @@ import com.gtcgroup.quickstart.de.QuickNoteDE;
 import com.gtcgroup.quickstart.to.NoteResponseTO;
 
 /**
- * An I/O Controller class used for demonstration.
+ * This I/O Controller class demonstrates typical usage.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at

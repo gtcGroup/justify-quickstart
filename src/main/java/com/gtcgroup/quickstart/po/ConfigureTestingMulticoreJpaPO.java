@@ -23,14 +23,18 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.quickstart.exception;
+package com.gtcgroup.quickstart.po;
 
-import com.gtcgroup.justify.core.base.JstBaseRuntimeException;
-import com.gtcgroup.justify.core.helper.internal.SystemOutLoggingUtilHelper;
-import com.gtcgroup.justify.core.po.JstExceptionPO;
+import java.util.List;
+import java.util.Map;
+
+import com.gtcgroup.justify.jpa.testing.extension.JstConfigureTestingJpaPO;
+import com.gtcgroup.justify.jpa.testing.populator.JstBaseTestingPopulator;
+import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
+import com.gtcgroup.quickstart.populator.QuickStartMulticoreTestingPopulator;
 
 /**
- * This {@link RuntimeException} class demonstrates typical usage.
+ * This Parameter Object class demonstrates typical usage.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -40,29 +44,22 @@ import com.gtcgroup.justify.core.po.JstExceptionPO;
  * @author Marvin Toll
  * @since 8.5
  */
-public class QuickStartException extends JstBaseRuntimeException {
+public class ConfigureTestingMulticoreJpaPO extends JstConfigureTestingJpaPO {
 
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Constructor
-	 */
-	public QuickStartException(final JstExceptionPO exceptionPO) {
-
-		super(exceptionPO);
-	}
-
-	/**
-	 * Constructor
-	 */
-	public QuickStartException(final JstExceptionPO exceptionPO, final Throwable exception) {
-
-		super(exceptionPO, exception);
+	@Override
+	public String definePersistenceUnitNameTM() {
+		return ConstantsQuickStart.QUICKSTART_MULTICORE_PU;
 	}
 
 	@Override
-	protected void logExceptionTM(final JstExceptionPO exceptionPO) {
-		SystemOutLoggingUtilHelper.logException(exceptionPO);
+	public void populateCreateListTM(final List<Class<? extends JstBaseTestingPopulator>> testingPopulatorList) {
+		testingPopulatorList.add(QuickStartMulticoreTestingPopulator.class);
+	}
 
+	@Override
+	public void populateEntityManagerFactoryPropertiesTM(final Map<String, Object> entityManagerFactoryPropertyMap) {
+
+		// <property name="eclipselink.logging.level" value="FINE" />
+		entityManagerFactoryPropertyMap.put("eclipselink.logging.level", "INFO");
 	}
 }

@@ -23,9 +23,11 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gtcgroup.quickstart.demo.assertions;
+package com.gtcgroup.quickstart.demo.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import javax.persistence.OneToOne;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,15 +37,15 @@ import com.gtcgroup.justify.rest.testing.assertion.AssertionsREST;
 import com.gtcgroup.justify.rest.testing.assertion.JstAssertRestPO;
 import com.gtcgroup.justify.rest.testing.extension.JstConfigureTestingREST;
 import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
+import com.gtcgroup.quickstart.de.QuickVacationDE;
 import com.gtcgroup.quickstart.po.ConfigureTestingJpaPO;
 import com.gtcgroup.quickstart.po.ConfigureTestingRestPO;
 import com.gtcgroup.quickstart.to.NoteResponseTO;
 import com.sun.research.ws.wadl.HTTPMethods;
 
 /**
- * This class demonstrates REST convenience assertions using the
- * {@link AssertionsREST} enum. Note: JPA configuration must occur prior to REST
- * configuration.
+ * This demonstration class verifies the {@link QuickVacationDE} cascade values
+ * within the {@link OneToOne} annotations.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -51,11 +53,11 @@ import com.sun.research.ws.wadl.HTTPMethods;
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since 8.5
  */
 @JstConfigureTestingLogToConsole
-@JstConfigureTestingJPA(configureTestingJpaPO = ConfigureTestingJpaPO.class)
 @JstConfigureTestingREST(configureTestingRestPO = ConfigureTestingRestPO.class)
+@JstConfigureTestingJPA(configureTestingJpaPO = ConfigureTestingJpaPO.class)
 public class AssertionsRestDemonstration {
 
 	@Test

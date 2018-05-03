@@ -26,19 +26,23 @@
 package com.gtcgroup.quickstart.constants;
 
 /**
+ * This Constants class demonstrates typical usage.
+ *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
  * <a href="http://gtcGroup.com">gtcGroup.com </a>.
  * </p>
  *
  * @author Marvin Toll
- * @since v3.0
+ * @since 8.5
  */
 public enum ConstantsQuickStart {
 
 	INSTANCE;
 
-	public static final String JUSTIFY_PU = "quickstart-pu";
+	public static final String QUICKSTART_PU = "quickstart-pu";
+
+	public static final String QUICKSTART_MULTICORE_PU = "quickstart-multicore-pu";
 
 	public static final String QUICKSTART_NOTE_UUID = "quickStartUUID";
 

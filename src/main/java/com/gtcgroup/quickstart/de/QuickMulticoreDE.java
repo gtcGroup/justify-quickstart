@@ -26,17 +26,14 @@
 package com.gtcgroup.quickstart.de;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.gtcgroup.justify.jpa.de.BaseUuidDE;
 
 /**
- * This Domain {@link Entity} class demonstrates typical usage.
+ * This Domain {@link Entity} class demonstrates multicore usage.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
@@ -47,39 +44,23 @@ import com.gtcgroup.justify.jpa.de.BaseUuidDE;
  * @since 8.5
  */
 @Entity
-@Table(name = "VACATION")
-@AttributeOverride(name = "uuid", column = @Column(name = "VACATION_UUID"))
-public class QuickVacationDE extends BaseUuidDE {
+@Table(name = "MULTICORE")
+@AttributeOverride(name = "uuid", column = @Column(name = "MULTICORE_UUID"))
+public class QuickMulticoreDE extends BaseUuidDE {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "VACATION_DESTINATION")
-	private String destination;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "NOTE_UUID", referencedColumnName = "NOTE_UUID")
-	private QuickNoteDE note;
-
-	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
-	@JoinColumn(name = "CUSTOMER_UUID", referencedColumnName = "CUSTOMER_UUID")
-	private QuickCustomerDE customer;
+	@Column(name = "MULTICORE_INT")
+	private int multicoreInt;
 
 	@Override
 	public boolean equals(final Object obj) {
 		return super.equals(obj);
 	}
 
-	public QuickCustomerDE getCustomer() {
+	public int getMulticoreInt() {
 
-		return this.customer;
-	}
-
-	public String getDestination() {
-		return this.destination;
-	}
-
-	public QuickNoteDE getNote() {
-		return this.note;
+		return this.multicoreInt;
 	}
 
 	@Override
@@ -87,19 +68,9 @@ public class QuickVacationDE extends BaseUuidDE {
 		return super.hashCode();
 	}
 
-	public void setCustomer(final QuickCustomerDE quickCustomerDE) {
+	public QuickMulticoreDE setMulticoreInt(final int multicoreInt) {
 
-		this.customer = quickCustomerDE;
-	}
-
-	public QuickVacationDE setDestination(final String destination) {
-
-		this.destination = destination;
+		this.multicoreInt = multicoreInt;
 		return this;
-	}
-
-	public void setNote(final QuickNoteDE quickNoteDE) {
-
-		this.note = quickNoteDE;
 	}
 }

@@ -34,6 +34,8 @@ import com.gtcgroup.quickstart.constants.ConstantsQuickStart;
 import com.gtcgroup.quickstart.populator.QuickStartTestingPopulator;
 
 /**
+ * This Parameter Object class demonstrates typical usage.
+ *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
  * <a href="http://gtcGroup.com">gtcGroup.com </a>.
@@ -46,7 +48,7 @@ public class ConfigureTestingJpaPO extends JstConfigureTestingJpaPO {
 
 	@Override
 	public String definePersistenceUnitNameTM() {
-		return ConstantsQuickStart.JUSTIFY_PU;
+		return ConstantsQuickStart.QUICKSTART_PU;
 	}
 
 	@Override

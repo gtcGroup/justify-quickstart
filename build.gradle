@@ -57,9 +57,11 @@ dependencies {
 
     //compile project(':justify-jpa')
     //compile project(':justify-rest')
+    //compile project(':justify-multicore')
 	
 	compile 'com.gtcgroup:justify-jpa:8.5.0-alpha5'
 	compile 'com.gtcgroup:justify-rest:8.5.0-alpha5'
+    compile 'com.gtcgroup:justify-multicore:8.5.0-alpha5'
 	
 }
 

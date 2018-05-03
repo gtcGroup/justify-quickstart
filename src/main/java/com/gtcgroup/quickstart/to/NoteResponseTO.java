@@ -27,6 +27,17 @@ package com.gtcgroup.quickstart.to;
 
 import com.gtcgroup.justify.core.base.JstBaseTO;
 
+/**
+ * This Transfer Object class demonstrates typical usage.
+ *
+ * <p style="font-family:Verdana; font-size:10px; font-style:italic">
+ * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
+ * <a href="http://gtcGroup.com">gtcGroup.com </a>.
+ * </p>
+ *
+ * @author Marvin Toll
+ * @since 8.5
+ */
 public class NoteResponseTO extends JstBaseTO {
 
 	private static final long serialVersionUID = 1L;

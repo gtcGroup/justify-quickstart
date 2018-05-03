@@ -31,7 +31,7 @@ import com.gtcgroup.justify.rest.testing.extension.JstConfigureTestingRestPO;
 import com.gtcgroup.quickstart.ic.QuickStartRestIC;
 
 /**
- * This Parameter Object class supports configuration.
+ * This Parameter Object class demonstrates typical usage.
  *
  * <p style="font-family:Verdana; font-size:10px; font-style:italic">
  * Copyright (c) 2006 - 2018 by Global Technology Consulting Group, Inc. at
